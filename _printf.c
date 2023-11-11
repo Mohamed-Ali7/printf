@@ -79,7 +79,7 @@ int _printf(const char *format, ...)
 */
 int print_char_format(va_list ptr)
 {
-	char c = va_arg(ptr, int);
+	char c = (char) va_arg(ptr, int);
 
 	if (c == '\0')
 	{
