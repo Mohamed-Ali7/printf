@@ -80,6 +80,10 @@ int print_char_format(va_list ptr)
 {
 	char c = va_arg(ptr, int);
 
+	if (c == 28 || c == 0)
+	{
+		exit(1);
+	}
 	write(1, &c, 1);
 	return (1);
 }
