@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include "main.h"
 #include <stdarg.h>
+#include <stdlib.h>
 
 int print_char_format(va_list ptr);
 int print_string_format(va_list ptr);
