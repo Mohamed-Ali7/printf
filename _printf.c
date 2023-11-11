@@ -26,6 +26,10 @@ int _printf(const char *format, ...)
 	};
 	va_list listPtr;
 
+	if (format == NULL)
+	{
+		exit(1);
+	}
 	va_start(listPtr, format);
 	while (format[i] != '\0')
 	{
