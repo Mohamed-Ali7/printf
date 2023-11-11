@@ -57,10 +57,6 @@ int _printf(const char *format, ...)
 			printed_chars++;
 		}
 		i++;
-		if (format[i] == '\0' && va_arg(listPtr, int) != 0)
-		{
-			exit(1);
-		}
 	}
 
 	return (printed_chars);
