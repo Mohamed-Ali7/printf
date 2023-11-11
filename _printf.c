@@ -50,6 +50,11 @@ int _printf(const char *format, ...)
 				if (*(spec[j].specifier) == format[i + 1])
 				{
 					printed_chars += spec[j].func(listPtr);
+					break;
+				}
+				if (spec[j + 1].specifier == NULL)
+				{
+					exit(1);
 				}
 				j++;
 			}
@@ -75,10 +80,6 @@ int print_char_format(va_list ptr)
 {
 	char c = va_arg(ptr, int);
 
-	if (c == '\0')
-	{
-		exit(1);
-	}
 	write(1, &c, 1);
 	return (1);
 }
