@@ -68,7 +68,7 @@ int _printf(const char *format, ...)
 
 		i++;
 	}
-
+	va_end(listPtr);
 	return (printed_chars);
 }
 
@@ -81,6 +81,10 @@ int print_char_format(va_list ptr)
 {
 	char c = va_arg(ptr, int);
 
+	if (c == '\0')
+	{
+		exit(1);
+	}
 	write(1, &c, 1);
 	return (1);
 }
@@ -93,8 +97,13 @@ int print_char_format(va_list ptr)
 int print_string_format(va_list ptr)
 {
 	char *str = va_arg(ptr, char *);
-	int l = _len(str);
+	int l;
 
+	if (str == NULL)
+	{
+		exit(1);
+	}
+	l = _len(str);
 	write(1, str, l);
 	return (l);
 }
