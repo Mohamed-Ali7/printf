@@ -63,6 +63,7 @@ int _printf(const char *format, ...)
 				{
 					write(1, &format[i - 1], 1);
 					write(1, &format[i], 1);
+					printed_chars += 2;
 				}
 			}
 		}
@@ -84,7 +85,7 @@ int _printf(const char *format, ...)
 */
 int print_char_format(va_list ptr)
 {
-	unsigned char c = va_arg(ptr, int);
+	char c = va_arg(ptr, int);
 
 	write(1, &c, 1);
 	return (1);
