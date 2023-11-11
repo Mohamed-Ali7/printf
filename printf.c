@@ -6,6 +6,7 @@
 
 int print_char_format(va_list ptr);
 int print_string_format(va_list ptr);
+int print_int_format(va_list ptr);
 int _len(char *s);
 
 /**
@@ -23,6 +24,8 @@ int _printf(const char *format, ...)
 	spec_format spec[] = {
 		{"c", print_char_format},
 		{"s", print_string_format},
+		{"d", print_int_format},
+		{"i", print_int_format},
 		{NULL, NULL}
 	};
 	va_list listPtr;
