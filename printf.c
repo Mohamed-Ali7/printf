@@ -84,7 +84,7 @@ int _printf(const char *format, ...)
 */
 int print_char_format(va_list ptr)
 {
-	char c = va_arg(ptr, int);
+	unsigned char c = va_arg(ptr, int);
 
 	write(1, &c, 1);
 	return (1);
