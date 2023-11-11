@@ -81,7 +81,7 @@ int _printf(const char *format, ...)
 /**
 * print_char_format - Prints the _printf function's argument in char format
 * @ptr: Is the pointer to the list of arguments of the _printf function
-* Return: void
+* Return: The number of printed characters
 */
 int print_char_format(va_list ptr)
 {
@@ -94,20 +94,58 @@ int print_char_format(va_list ptr)
 /**
 * print_string_format - Prints the _printf function's argument in string format
 * @ptr: Is the pointer to the list of arguments of the _printf function
-* Return: void
+* Return: The number of printed characters
 */
 int print_string_format(va_list ptr)
 {
 	char *str = va_arg(ptr, void *);
-	int l;
+	int length;
 
 	if (str == NULL)
 	{
 		str = "(null)";
 	}
-	l = _len(str);
-	write(1, str, l);
-	return (l);
+	length = _len(str);
+	write(1, str, length);
+	return (length);
+}
+
+/**
+* print_int_format - Prints the _printf function's argument in int format
+* @ptr: Is the pointer to the list of arguments of the _printf function
+* Return: The number of printed characters
+*/
+int print_int_format(va_list ptr)
+{
+	int i = va_arg(ptr, int);
+	int x = 0;
+	int length = 0;
+	char nums[10];
+
+	if (i == 0)
+	{
+		write(1, "0", 1);
+		return (1);
+	}
+	if (i < 0)
+	{
+		write(1, "-", 1);
+		i *= -1;
+		length++;
+	}
+	while (i != 0)
+	{
+		nums[x] = (i % 10) + '0';
+		i = i / 10;
+		x++;
+		length++;
+	}
+	while (x >= 1)
+	{
+		write(1, &nums[x - 1], 1);
+		x--;
+	}
+	return (length);
 }
 
 /**
