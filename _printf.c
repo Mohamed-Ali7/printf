@@ -87,7 +87,6 @@ int print_char_format(va_list ptr)
 
 	if (c == '\0')
 	{
-		printf("Character in null\n");
 		exit(1);
 	}
 	write(1, &c, 1);
@@ -106,7 +105,6 @@ int print_string_format(va_list ptr)
 
 	if (str == NULL)
 	{
-		printf("String in null\n");
 		exit(1);
 	}
 	l = _len(str);
