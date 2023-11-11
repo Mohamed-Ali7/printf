@@ -38,16 +38,17 @@ int _printf(const char *format, ...)
 
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == '%')
+			i++;
+			if (format[i] == '%')
 			{
-				write(1, &format[i + 1], 1);
+				write(1, &format[i], 1);
 				printed_chars++;
-				i += 2;
+				i++;
 				continue;
 			}
 			while (spec[j].specifier != NULL)
 			{
-				if (*(spec[j].specifier) == format[i + 1])
+				if (*(spec[j].specifier) == format[i])
 				{
 					printed_chars += spec[j].func(listPtr);
 					break;
@@ -58,7 +59,6 @@ int _printf(const char *format, ...)
 				}
 				j++;
 			}
-			i++;
 		}
 		else
 		{
@@ -67,6 +67,10 @@ int _printf(const char *format, ...)
 		}
 
 		i++;
+		if (format[i] == '\0' && va_arg(listPtr, int) !=  0)
+		{
+			exit(1);
+		}
 	}
 	va_end(listPtr);
 	return (printed_chars);
@@ -79,10 +83,11 @@ int _printf(const char *format, ...)
 */
 int print_char_format(va_list ptr)
 {
-	char c = (char) va_arg(ptr, int);
+	char c = va_arg(ptr, int);
 
 	if (c == '\0')
 	{
+		printf("Character in null\n");
 		exit(1);
 	}
 	write(1, &c, 1);
@@ -101,6 +106,7 @@ int print_string_format(va_list ptr)
 
 	if (str == NULL)
 	{
+		printf("String in null\n");
 		exit(1);
 	}
 	l = _len(str);
@@ -124,4 +130,3 @@ int _len(char *s)
 	}
 	return (i);
 }
-
