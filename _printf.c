@@ -50,6 +50,11 @@ int _printf(const char *format, ...)
 				if (*(spec[j].specifier) == format[i + 1])
 				{
 					printed_chars += spec[j].func(listPtr);
+					break;
+				}
+				if (spec[j + 1].specifier == NULL)
+				{
+					exit(1);
 				}
 				j++;
 			}
