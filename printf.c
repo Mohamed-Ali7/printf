@@ -165,7 +165,7 @@ int print_binary_format(va_list ptr)
 	unsigned int val = va_arg(ptr, unsigned int);
 	int length = 0;
 	unsigned int tmp = val;
-	int divider = 1;
+	unsigned int divider = 1;
 	char bit;
 
 	if (val == 0)
