@@ -7,6 +7,7 @@
 int print_char_format(va_list ptr);
 int print_string_format(va_list ptr);
 int print_int_format(va_list ptr);
+int print_binary_format(va_list ptr);
 int _len(char *s);
 
 /**
@@ -26,6 +27,7 @@ int _printf(const char *format, ...)
 		{"s", print_string_format},
 		{"d", print_int_format},
 		{"i", print_int_format},
+		{"b", print_binary_format},
 		{NULL, NULL}
 	};
 	va_list listPtr;
@@ -149,6 +151,41 @@ int print_int_format(va_list ptr)
 		write(1, &nums[x - 1], 1);
 		x--;
 	}
+	return (length);
+}
+
+/**
+* print_binary_format - Prints the _printf function's argument in int format
+* @ptr: Is the pointer to the list of arguments of the _printf function
+* Return: The number of printed characters
+*/
+
+int print_binary_format(va_list ptr)
+{
+	unsigned int val = va_arg(ptr, unsigned int);
+	int length = 0;
+	int x = 0;
+	char binary[10];
+
+	if (val == 0)
+	{
+		write(1, "0", 1);
+		return (1);
+	}
+	while (val > 0)
+	{
+		binary[x] = (val % 2) + '0';
+		val = val / 2;
+		x++;
+		length++;
+	}
+
+	while (x >= 1)
+	{
+		write(1, &binary[x - 1], 1);
+		x--;
+	}
+
 	return (length);
 }
 
