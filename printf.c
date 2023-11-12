@@ -122,6 +122,7 @@ int print_int_format(va_list ptr)
 {
 	int i = va_arg(ptr, int);
 	int x = 0;
+	unsigned int tmp = i;
 	int length = 0;
 	char nums[10];
 
@@ -133,13 +134,13 @@ int print_int_format(va_list ptr)
 	if (i < 0)
 	{
 		write(1, "-", 1);
-		i *= -1;
+		tmp *= -1;
 		length++;
 	}
-	while (i != 0)
+	while (tmp != 0)
 	{
-		nums[x] = (i % 10) + '0';
-		i = i / 10;
+		nums[x] = (tmp % 10) + '0';
+		tmp = tmp / 10;
 		x++;
 		length++;
 	}
