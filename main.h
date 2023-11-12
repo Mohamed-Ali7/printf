@@ -20,6 +20,10 @@ int print_char_format(va_list ptr);
 int print_string_format(va_list ptr);
 int print_int_format(va_list ptr);
 int print_binary_format(va_list ptr);
+int print_unsigned_int_format(va_list ptr);
+int print_octal_format(va_list ptr);
+int print_lower_hex_format(va_list ptr);
+int print_upper_hex_format(va_list ptr);
 int _len(char *c);
 
 #endif

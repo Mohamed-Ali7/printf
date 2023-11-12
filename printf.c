@@ -16,7 +16,8 @@ int _printf(const char *format, ...)
 	int j, i, printed_chars = 0;
 	spec_format spec[] = {{"c", print_char_format}, {"s", print_string_format},
 		{"d", print_int_format}, {"i", print_int_format}, {"b", print_binary_format},
-		{NULL, NULL}};
+		{"u", print_unsigned_int_format}, {"o", print_octal_format},
+		{"x", print_lower_hex_format}, {"X", print_upper_hex_format}, {NULL, NULL}};
 	va_list listPtr;
 
 	if (format == NULL)
