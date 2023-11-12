@@ -16,4 +16,10 @@ typedef struct specifier_format
 
 int _printf(const char *format, ...);
 
+int print_char_format(va_list ptr);
+int print_string_format(va_list ptr);
+int print_int_format(va_list ptr);
+int print_binary_format(va_list ptr);
+int _len(char *c);
+
 #endif
