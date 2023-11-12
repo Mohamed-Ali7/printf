@@ -164,26 +164,31 @@ int print_binary_format(va_list ptr)
 {
 	unsigned int val = va_arg(ptr, unsigned int);
 	int length = 0;
-	int x = 0;
-	char binary[10];
+	unsigned int tmp = val;
+	int divider = 1;
+	char bit;
 
 	if (val == 0)
 	{
 		write(1, "0", 1);
 		return (1);
 	}
+
 	while (val > 0)
 	{
-		binary[x] = (val % 2) + '0';
-		val = val / 2;
-		x++;
-		length++;
+		val /= 2;
+		if (val != 0)
+		{
+			divider *= 2;
+		}
 	}
 
-	while (x >= 1)
+	while (divider >= 1)
 	{
-		write(1, &binary[x - 1], 1);
-		x--;
+		bit = ((tmp / divider) % 2) + '0';
+		write(1, &bit, 1);
+		divider /= 2;
+		length++;
 	}
 
 	return (length);
