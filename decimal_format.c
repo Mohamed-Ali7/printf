@@ -63,8 +63,8 @@ int print_unsigned_int_format(va_list ptr, char *buffer, int *buffer_index)
 
 	if (i == 0)
 	{
-		write(1, "0", 1);
-		return (1);
+		printed_characters += add_to_buffer(buffer, buffer_index, "0", 1);
+		return (printed_characters);
 	}
 
 	while (tmp > 0)

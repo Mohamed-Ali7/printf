@@ -5,8 +5,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int free_buffer_if_full(char *buffer, int *buffer_index);
-
 /**
  * get_specifier_format - Creates and Initialize an array of spec_format sruct
  * Return: The created array
@@ -77,10 +75,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%' && format[++i] != '%')
 		{
 			if (format[i] == '\0')
-			{
-				free_buffer(buffer, &buffer_index);
 				exit(1);
-			}
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
 				if (*(spec[j].specifier) == format[i])
@@ -105,22 +100,4 @@ int _printf(const char *format, ...)
 	va_end(listPtr);
 	free(spec);
 	return (printed_chars);
-}
-
-/**
- * free_buffer_if_full - Helper function to check the buffer if full & free it
- * @buffer: Is the buffer to check
- * @buffer_index: Is the current index of the buffer
- * Return: The number of printed characters
- */
-
-int free_buffer_if_full(char *buffer, int *buffer_index)
-{
-	int i = 0;
-
-	if (*buffer_index == 1024)
-	{
-		i += free_buffer(buffer, buffer_index);
-	}
-	return (i);
 }
