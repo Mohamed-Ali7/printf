@@ -3,7 +3,6 @@
 #include "main.h"
 #include <stdarg.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 /**
  * get_specifier_format - Creates and Initialize an array of spec_format sruct
@@ -63,11 +62,11 @@ int _printf(const char *format, ...)
 {
 	int j, i, buffer_index = 0, printed_chars = 0;
 	spec_format *spec = get_specifier_format();
-	char *buffer = malloc(sizeof(char) * 1024);
+	char buffer[1024];
 	va_list listPtr;
 	char ch;
 
-	if (format == NULL || buffer == NULL)
+	if (format == NULL)
 		free(spec), exit(1);
 	va_start(listPtr, format);
 	for (i = 0; format[i] != '\0'; i++)
@@ -75,7 +74,7 @@ int _printf(const char *format, ...)
 		if (format[i] == '%' && format[++i] != '%')
 		{
 			if (format[i] == '\0')
-				free_buffer(buffer, &buffer_index), free(buffer), free(spec), exit(1);
+				free(spec), exit(1);
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
 				if (*(spec[j].specifier) == format[i])
@@ -99,6 +98,5 @@ int _printf(const char *format, ...)
 	printed_chars += free_buffer(buffer, &buffer_index);
 	va_end(listPtr);
 	free(spec);
-	free(buffer);
 	return (printed_chars);
 }
