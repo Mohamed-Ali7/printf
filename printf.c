@@ -72,14 +72,14 @@ int _printf(const char *format, ...)
 	char ch;
 
 	if (format == NULL)
-		exit(1);
+		return (-1);;
 	va_start(listPtr, format);
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%' && format[++i] != '%')
 		{
 			if (format[i] == '\0' || (format[i + 1] == ' ' && format[i + 2] == '\0'))
-				exit(1);
+				return (-1);
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
 				if (*(spec[j].specifier) == format[i])
