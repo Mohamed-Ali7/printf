@@ -18,9 +18,9 @@ int add_to_buffer(char *buffer, int *buffer_index, char *src, int size)
 
 	for (i = 0; i < size; i++)
 	{
+
 		buffer[*buffer_index] = src[i];
 		*buffer_index = *buffer_index + 1;
-
 		if (*buffer_index == 1024)
 		{
 			printed_characters += free_buffer(buffer, buffer_index);
