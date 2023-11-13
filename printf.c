@@ -64,11 +64,11 @@ spec_format *get_specifier_format()
 int _printf(const char *format, ...)
 {
 	int j, i, buffer_index = 0, printed_chars = 0;
-	char buffer[1024];
+	char *buffer = malloc(sizeof(char) * 1024);
 	spec_format *spec = get_specifier_format();
 	va_list listPtr;
 
-	if (format == NULL)
+	if (format == NULL || buffer == NULL)
 		exit(1);
 	va_start(listPtr, format);
 	for (i = 0; format[i] != '\0'; i++)
@@ -100,6 +100,7 @@ int _printf(const char *format, ...)
 	printed_chars += free_buffer(buffer, &buffer_index);
 	va_end(listPtr);
 	free(spec);
+	free(buffer);
 	return (printed_chars);
 }
 
