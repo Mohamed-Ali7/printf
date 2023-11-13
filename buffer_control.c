@@ -41,11 +41,10 @@ int add_to_buffer(char *buffer, int *buffer_index, char *src, int size)
 
 int free_buffer(char *buf, int *buf_index)
 {
-	int i;
 	int index = *buf_index;
 
-		write(1, buf, index);
+	write(1, buf, index);
 
 	*buf_index = 0;
-	return (i);
+	return (index);
 }
