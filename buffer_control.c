@@ -44,10 +44,7 @@ int free_buffer(char *buf, int *buf_index)
 	int i;
 	int index = *buf_index;
 
-	for (i = 0; i < index; i++)
-	{
-		write(1, &buf[i], 1);
-	}
+		write(1, buf, index);
 
 	*buf_index = 0;
 	return (i);
