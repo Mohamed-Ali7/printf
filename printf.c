@@ -78,7 +78,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[++i] != '%')
 		{
-			if (format[i] == '\0')
+			if (format[i] == '\0' || (format[i + 1] == ' ' && format[i + 2] == '\0'))
 				exit(1);
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
