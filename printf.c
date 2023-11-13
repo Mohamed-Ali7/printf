@@ -68,14 +68,14 @@ int _printf(const char *format, ...)
 	char ch;
 
 	if (format == NULL)
-		free(spec),exit(1);
+		free(spec), exit(1);
 	va_start(listPtr, format);
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%' && format[++i] != '%')
 		{
 			if (format[i] == '\0')
-				free_buffer(buffer, &buffer_index),va_end(listPtr),free(spec),exit(1);
+				free_buffer(buffer, &buffer_index), va_end(listPtr), free(spec), exit(1);
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
 				if (*(spec[j].specifier) == format[i])
