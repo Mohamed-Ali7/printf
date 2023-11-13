@@ -99,6 +99,6 @@ int _printf(const char *format, ...)
 	printed_chars += free_buffer(buffer, &buffer_index);
 	va_end(listPtr);
 	free(spec);
-	free(buffer)
+	free(buffer);
 	return (printed_chars);
 }
