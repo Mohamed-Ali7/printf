@@ -1,55 +1,62 @@
 #include <unistd.h>
 #include <stdarg.h>
+#include "main.h"
 
-int print_hex_format(char *hex_counter, unsigned int i);
+int print_hex_format(char *hex, unsigned int i, char *buff, int *buffer_ind);
 
 /**
 * print_lower_hex_format - Prints the _printf function's argument
 * in lower hexadecimal format
 * @ptr: Is the pointer to the list of arguments of the _printf function
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
 * Return: The number of printed characters
 */
-int print_lower_hex_format(va_list ptr)
+int print_lower_hex_format(va_list ptr, char *buffer, int *buffer_index)
 {
 	unsigned int i = va_arg(ptr, unsigned int);
 	char *hex_format = "0123456789abcdef";
 
-	return (print_hex_format(hex_format, i));
+	return (print_hex_format(hex_format, i, buffer, buffer_index));
 }
 
 /**
 * print_upper_hex_format - Prints the _printf function's argument
 * in upper hexadecimal format
 * @ptr: Is the pointer to the list of arguments of the _printf function
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
 * Return: The number of printed characters
 */
-int print_upper_hex_format(va_list ptr)
+int print_upper_hex_format(va_list ptr, char *buffer, int *buffer_index)
 {
 	unsigned int i = va_arg(ptr, unsigned int);
 	char *hex_format = "0123456789ABCDEF";
 
-	return (print_hex_format(hex_format, i));
+	return (print_hex_format(hex_format, i, buffer, buffer_index));
 }
 
 /**
 * print_hex_format - Prints the _printf function's argument
 * in hexadecimal format
-* @hex_counter: Is the hex format in upper or lower letters
+* @hex: Is the hex format in upper or lower letters
 * @i: Is the number to print its hexadecimal format
+* @buff: Is the buffer to store the printable character
+* @buffer_ind: Is the current index of the buffer
 * Return: The number of printed characters
 */
 
-int print_hex_format(char *hex_counter, unsigned int i)
+int print_hex_format(char *hex, unsigned int i, char *buff, int *buffer_ind)
 {
 	unsigned int tmp = i;
 	int divider = 1;
-	int length = 0;
+	int printed_characters = 0;
 	int index;
 
 	if (i == 0)
 	{
-		write(1, "0", 1);
-		return (1);
+		printed_characters = add_to_buffer(buff, buffer_ind, "0", 1);
+		return (printed_characters);
 	}
 
 	while (tmp > 0)
@@ -59,14 +66,13 @@ int print_hex_format(char *hex_counter, unsigned int i)
 		{
 			divider *= 16;
 		}
-		length++;
 	}
 
 	while (divider >= 1)
 	{
 		index = (i / divider) % 16;
-		write(1, &hex_counter[index], 1);
+		printed_characters = add_to_buffer(buff, buffer_ind, &hex[index], 1);
 		divider /= 16;
 	}
-	return (length);
+	return (printed_characters);
 }
