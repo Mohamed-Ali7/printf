@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
 * print_char_format - Prints the _printf function's argument in char format
@@ -99,25 +101,30 @@ int print_cus_string_format(va_list ptr, char *buffer, int *buffer_index)
 */
 int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index)
 {
-	char *s = va_arg(ptr, char *);
+	char *str = va_arg(ptr, char *);
 	int i = 0;
 	int printed_characters = 0;
+	char tmp[6] = "(nill)";
 
-	while (s[i] != '\0')
+	if (str == NULL)
 	{
-		while ((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z'))
+		str = tmp;
+	}
+
+	while (str[i] != '\0')
+	{
+		while ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' && str[i] <= 'z'))
 		{
-			if ((s[i] < 'Z' && (s[i] + 13) > 'Z') || (s[i] >= 'a' && (s[i] + 13) > 'z'))
+			if ((str[i] < 'Z' && (str[i] + 13) > 'Z') || (str[i] >= 'a' && (str[i] + 13) > 'z'))
 			{
-				s[i] -= 26;
+				str[i] -= 26;
 			}
-			s[i] = s[i] + 13;
+			str[i] = str[i] + 13;
 			i++;
 		}
-
 		i++;
 	}
-	printed_characters += add_to_buffer(buffer, buffer_index, s, i);
+	printed_characters += add_to_buffer(buffer, buffer_index, str, i);
 	return (printed_characters);
 }
 
