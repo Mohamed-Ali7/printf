@@ -11,7 +11,7 @@
 
 spec_format *get_specifier_format()
 {
-	spec_format *spec = malloc(sizeof(spec_format) * 13);
+	spec_format *spec = malloc(sizeof(spec_format) * 14);
 
 	if (spec == NULL)
 	{
@@ -42,8 +42,10 @@ spec_format *get_specifier_format()
 	spec[10].func = print_add_format;
 	spec[11].specifier = "R";
 	spec[11].func = print_rot13_string_format;
-	spec[12].specifier = NULL;
-	spec[12].func = NULL;
+	spec[12].specifier = "r";
+	spec[12].func = print_rev_string_format;
+	spec[13].specifier = NULL;
+	spec[13].func = NULL;
 	return (spec);
 }
 
@@ -59,7 +61,7 @@ int _printf(const char *format, ...)
 {
 	int j, i, buffer_index = 0, printed_chars = 0;
 	spec_format *spec = get_specifier_format();
-	char buffer[BUFF_SIZE];
+	char buffer[1024];
 	va_list listPtr;
 	char ch[2] = "%a";
 

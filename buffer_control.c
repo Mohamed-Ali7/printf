@@ -20,7 +20,7 @@ int add_to_buffer(char *buffer, int *buffer_index, char *src, int size)
 		buffer[*buffer_index] = src[i];
 		*buffer_index = *buffer_index + 1;
 
-		if (*buffer_index == BUFF_SIZE)
+		if (*buffer_index == 1024)
 		{
 			printed_characters += free_buffer(buffer, buffer_index);
 
@@ -46,4 +46,21 @@ int free_buffer(char *buf, int *buf_index)
 
 	*buf_index = 0;
 	return (index);
+}
+
+/**
+* _len - Calculates the length of a string
+* @s: Is the string to calcualte its length
+* Return: The length of the string (s)
+*/
+
+int _len(char *s)
+{
+	int i = 0;
+
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }

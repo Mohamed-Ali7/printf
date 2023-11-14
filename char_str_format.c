@@ -137,18 +137,34 @@ int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index)
 }
 
 /**
-* _len - Calculates the length of a string
-* @s: Is the string to calcualte its length
-* Return: The length of the string (s)
+* print_rev_string_format - Prints the _printf function's string argument
+* in reveresed
+*
+* @ptr: Is the pointer to the list of arguments of the _printf function
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
+* Return: The number of printed characters
 */
 
-int _len(char *s)
+int print_rev_string_format(va_list ptr, char *buffer, int *buffer_index)
 {
-	int i = 0;
+	char *str = va_arg(ptr, char *);
+	int printed_characters = 0;
+	char c;
+	int str_len;
 
-	while (s[i] != '\0')
+	if (str == NULL)
 	{
-		i++;
+		str = "(null)";
 	}
-	return (i);
+	str_len = _len(str);
+
+	while (str_len >= 1)
+	{
+		c = str[str_len - 1];
+
+		printed_characters += add_to_buffer(buffer, buffer_index, &c, 1);
+		str_len--;
+	}
+	return (printed_characters);
 }

@@ -1,8 +1,6 @@
 #ifndef PRINT_F_H
 #define PRINT_F_H
 
-#define BUFF_SIZE 1024
-
 #include <stdarg.h>
 
 /**
@@ -35,6 +33,7 @@ int print_hex_format(char *hex, unsigned int i, char *buff, int *buff_index);
 int print_cus_string_format(va_list ptr, char *buffer, int *buffer_index);
 int print_add_format(va_list ptr, char *buffer, int *buffer_index);
 int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index);
+int print_rev_string_format(va_list ptr, char *buffer, int *buffer_index);
 int _len(char *c);
 
 #endif
