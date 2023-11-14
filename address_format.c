@@ -12,7 +12,7 @@
 int print_add_format(va_list ptr, char *buffer, int *buffer_index)
 {
 	void *address = va_arg(ptr, void *);
-	long add_val = (uintptr_t) address;
+	unsigned long add_val = (uintptr_t) address;
 	int printed_characters = 0;
 	char *hex = "0123456789abcdef";
 
