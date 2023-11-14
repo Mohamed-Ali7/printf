@@ -1,5 +1,4 @@
 #include<unistd.h>
-#include <stdio.h>
 
 int free_buffer(char *buf, int *buf_index);
 
@@ -18,13 +17,14 @@ int add_to_buffer(char *buffer, int *buffer_index, char *src, int size)
 
 	for (i = 0; i < size; i++)
 	{
+		buffer[*buffer_index] = src[i];
+		*buffer_index = *buffer_index + 1;
+
 		if (*buffer_index == 1024)
 		{
 			printed_characters += free_buffer(buffer, buffer_index);
 
 		}
-		buffer[*buffer_index] = src[i];
-		*buffer_index = *buffer_index + 1;
 	}
 	return (printed_characters);
 }

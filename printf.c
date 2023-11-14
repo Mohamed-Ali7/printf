@@ -7,53 +7,6 @@
 int free_buffer_if_full(char *buffer, int *buffer_index);
 
 /**
- * get_specifier_format - Creates and Initialize an array of spec_format sruct
- * Return: The created array
- */
-
-spec_format *get_specifier_format()
-{
-	spec_format *spec = malloc(sizeof(spec_format) * 10);
-
-	if (spec == NULL)
-	{
-		exit(1);
-	}
-
-	spec[0].specifier = "c";
-	spec[0].func = print_char_format;
-
-	spec[1].specifier = "s";
-	spec[1].func = print_string_format;
-
-	spec[2].specifier = "d";
-	spec[2].func = print_int_format;
-
-	spec[3].specifier = "i";
-	spec[3].func = print_int_format;
-
-	spec[4].specifier = "b";
-	spec[4].func = print_binary_format;
-
-	spec[5].specifier = "u";
-	spec[5].func = print_unsigned_int_format;
-
-	spec[6].specifier = "o";
-	spec[6].func = print_octal_format;
-
-	spec[7].specifier = "x";
-	spec[7].func = print_lower_hex_format;
-
-	spec[8].specifier = "X";
-	spec[8].func = print_upper_hex_format;
-
-	spec[9].specifier = NULL;
-	spec[9].func = NULL;
-
-	return (spec);
-}
-
-/**
 * _printf - Produces output according to a format.
 * @format: Is string contains both text and format specifiers, which are
 * placeholders for the values to print
@@ -67,7 +20,7 @@ int _printf(const char *format, ...)
 		{"d", print_int_format}, {"i", print_int_format}, {"b", print_binary_format},
 		{"u", print_unsigned_int_format}, {"o", print_octal_format},
 		{"x", print_lower_hex_format}, {"X", print_upper_hex_format}, {NULL, NULL}};
-	char buffer[1024];
+	char buffer[BUF_SIZE];
 	va_list listPtr;
 	char ch;
 

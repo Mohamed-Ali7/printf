@@ -2,6 +2,7 @@
 #define PRINT_F_H
 #include <stdarg.h>
 
+#define BUF_SIZE 1024
 /**
 * struct specifier_format - Is a struct that contains format specifiers
 * and format functions
@@ -25,7 +26,7 @@ int print_octal_format(va_list ptr, char *buffer, int *buffer_index);
 int print_lower_hex_format(va_list ptr, char *buffer, int *buffer_index);
 int print_upper_hex_format(va_list ptr, char *buffer, int *buffer_index);
 int add_to_buffer(char *buffer, int *buffer_index, char *src, int size);
-int free_buffer(char *buf, int *buffer_index);
+int free_buffer(char *buf, int *buf_index);
 int _len(char *c);
 
 #endif
