@@ -5,9 +5,9 @@
 #include <stdlib.h>
 
 /**
- * get_specifier_format - Creates and Initialize an array of spec_format sruct
- * Return: The created array
- */
+* get_specifier_format - Creates and Initialize an array of spec_format sruct
+* Return: The created array
+*/
 
 spec_format *get_specifier_format()
 {
@@ -93,8 +93,7 @@ int _printf(const char *format, ...)
 		}
 		printed_chars += add_to_buffer(buffer, &buffer_index, (char *)&format[i], 1);
 	}
-	if (buffer_index > 0)
-		printed_chars += free_buffer(buffer, &buffer_index);
+	printed_chars += free_buffer(buffer, &buffer_index);
 	va_end(listPtr), free(spec);
 	return (printed_chars);
 }
