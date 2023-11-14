@@ -1,6 +1,8 @@
 #ifndef PRINT_F_H
 #define PRINT_F_H
 
+#define BUFF_SIZE 1024
+
 #include <stdarg.h>
 
 /**

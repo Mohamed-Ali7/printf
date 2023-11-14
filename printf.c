@@ -59,7 +59,7 @@ int _printf(const char *format, ...)
 {
 	int j, i, buffer_index = 0, printed_chars = 0;
 	spec_format *spec = get_specifier_format();
-	char buffer[1024];
+	char buffer[BUFF_SIZE];
 	va_list listPtr;
 	char ch[2] = "%a";
 
