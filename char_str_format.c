@@ -105,6 +105,7 @@ int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index)
 	int i = 0;
 	int printed_characters = 0;
 	char tmp[6] = "(nill)";
+	char c;
 
 	if (str == NULL)
 	{
@@ -115,7 +116,8 @@ int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index)
 	{
 		while ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' && str[i] <= 'z'))
 		{
-			if ((str[i] < 'Z' && (str[i] + 13) > 'Z') || (str[i] >= 'a' && (str[i] + 13) > 'z'))
+			c = str[i];
+			if ((c < 'Z' && (c + 13) > 'Z') || (c >= 'a' && (c + 13) > 'z'))
 			{
 				str[i] -= 26;
 			}
