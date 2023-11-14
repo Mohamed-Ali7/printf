@@ -104,29 +104,35 @@ int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index)
 	char *str = va_arg(ptr, char *);
 	int i = 0;
 	int printed_characters = 0;
-	char tmp[6] = "(NULL)";
 	char c;
 
 	if (str == NULL)
 	{
-		str = tmp;
+		str = "(null)";
 	}
 
 	while (str[i] != '\0')
 	{
-		while ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' && str[i] <= 'z'))
+		c = str[i];
+		if ((c >= 'A' && c <= 'Z'))
 		{
-			c = str[i];
-			if ((c < 'Z' && (c + 13) > 'Z') || (c >= 'a' && (c + 13) > 'z'))
+			if ((c + 13) > 'Z')
 			{
-				str[i] -= 26;
+				c -= 26;
 			}
-			str[i] = str[i] + 13;
-			i++;
+			c += 13;
 		}
+		else if ((c >= 'a' && c <= 'z'))
+		{
+			if ((c + 13) > 'z')
+			{
+				c -= 26;
+			}
+			c += 13;
+		}
+		printed_characters += add_to_buffer(buffer, buffer_index, &c, 1);
 		i++;
 	}
-	printed_characters += add_to_buffer(buffer, buffer_index, str, i);
 	return (printed_characters);
 }
 
