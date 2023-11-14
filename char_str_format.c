@@ -50,6 +50,48 @@ int print_string_format(va_list ptr, char *buffer, int *buffer_index)
 }
 
 /**
+* print_cus_string_format - Prints the _printf function's argument
+* in a custom string format
+* @ptr: Is the pointer to the list of arguments of the _printf function
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
+* Return: The number of printed characters
+*/
+int print_cus_string_format(va_list ptr, char *buffer, int *buffer_index)
+{
+	char *str = va_arg(ptr, void *);
+	int printed_characters = 0;
+	int i = 0;
+	char *hex = "0123456789ABCDEF";
+
+	if (str == NULL)
+	{
+		str = "(null)";
+	}
+
+	while (str[i] != '\0')
+	{
+		if (str[i] < 32 || str[i] >= 127)
+		{
+			printed_characters += add_to_buffer(buffer, buffer_index, "\\x", 2);
+			if (str[i] <= 16)
+			{
+				printed_characters += add_to_buffer(buffer, buffer_index, "0", 1);
+			}
+			print_hex_format(hex, (unsigned int) str[i], buffer, buffer_index);
+			i++;
+		}
+		else
+		{
+			printed_characters += add_to_buffer(buffer, buffer_index, &str[i], 1);
+			i++;
+		}
+	}
+
+	return (printed_characters);
+}
+
+/**
 * _len - Calculates the length of a string
 * @s: Is the string to calcualte its length
 * Return: The length of the string (s)

@@ -11,7 +11,7 @@
 
 spec_format *get_specifier_format()
 {
-	spec_format *spec = malloc(sizeof(spec_format) * 10);
+	spec_format *spec = malloc(sizeof(spec_format) * 11);
 
 	if (spec == NULL)
 	{
@@ -20,34 +20,26 @@ spec_format *get_specifier_format()
 
 	spec[0].specifier = "c";
 	spec[0].func = print_char_format;
-
 	spec[1].specifier = "s";
 	spec[1].func = print_string_format;
-
 	spec[2].specifier = "d";
 	spec[2].func = print_int_format;
-
 	spec[3].specifier = "i";
 	spec[3].func = print_int_format;
-
 	spec[4].specifier = "b";
 	spec[4].func = print_binary_format;
-
 	spec[5].specifier = "u";
 	spec[5].func = print_unsigned_int_format;
-
 	spec[6].specifier = "o";
 	spec[6].func = print_octal_format;
-
 	spec[7].specifier = "x";
 	spec[7].func = print_lower_hex_format;
-
 	spec[8].specifier = "X";
 	spec[8].func = print_upper_hex_format;
-
-	spec[9].specifier = NULL;
-	spec[9].func = NULL;
-
+	spec[9].specifier = "S";
+	spec[9].func = print_cus_string_format;
+	spec[10].specifier = NULL;
+	spec[10].func = NULL;
 	return (spec);
 }
 
