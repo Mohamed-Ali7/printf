@@ -14,26 +14,27 @@
 typedef struct specifier_format
 {
 	char *specifier;
-	int (*func)(va_list ptr, char *buffer, int *buffer_index);
+	int (*func)(va_list ptr, char *buffer, int *buffer_index, char *flags);
 } spec_format;
 
 int _printf(const char *format, ...);
 
-int print_char_format(va_list ptr, char *buffer, int *buffer_index);
-int print_string_format(va_list ptr, char *buffer, int *buffer_index);
-int print_int_format(va_list ptr, char *buffer, int *buffer_index);
-int print_binary_format(va_list ptr, char *buffer, int *buffer_index);
-int print_unsigned_int_format(va_list ptr, char *buffer, int *buffer_index);
-int print_octal_format(va_list ptr, char *buffer, int *buffer_index);
-int print_lower_hex_format(va_list ptr, char *buffer, int *buffer_index);
-int print_upper_hex_format(va_list ptr, char *buffer, int *buffer_index);
+int print_char_format(va_list ptr, char *buf, int *buf_ind, char *flags);
+int print_string_format(va_list ptr, char *buf, int *buf_ind, char *flags);
+int print_int_format(va_list ptr, char *buf, int *buf_ind, char *flags);
+int print_binary_format(va_list ptr, char *buf, int *buf_ind, char *flags);
+int print_unsigned_int_format(va_list p, char *buf, int *buf_in, char *flags);
+int print_octal_format(va_list ptr, char *buf, int *buf_ind, char *flags);
+int print_lower_hex_format(va_list pt, char *buf, int *buf_ind, char *flags);
+int print_upper_hex_format(va_list pt, char *buf, int *buf_ind, char *flags);
 int add_to_buffer(char *buffer, int *buffer_index, char src);
 int free_buffer(char *buf, int *buf_index);
-int print_hex_format(char *hex, unsigned int i, char *buff, int *buff_index);
-int print_cus_string_format(va_list ptr, char *buffer, int *buffer_index);
-int print_add_format(va_list ptr, char *buffer, int *buffer_index);
-int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index);
-int print_rev_string_format(va_list ptr, char *buffer, int *buffer_index);
+int print_hex_format(char *h, unsigned int i, char *bf, int *bf_n, char *flg);
+int print_cus_string_format(va_list pt, char *buf, int *buf_ind, char *flags);
+int print_add_format(va_list ptr, char *buf, int *buf_ind, char *flags);
+int print_rot13_string_format(va_list pt, char *buf, int *buf_in, char *flags);
+int print_rev_string_format(va_list ptr, char *buf, int *buf_ind, char *flags);
+int print_flag_if_exist(char *flag, char *buf, int *buf_index);
 int _len(char *c);
 
 #endif

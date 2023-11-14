@@ -4,6 +4,8 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
+int check_flag(const char *str);
+
 /**
 * get_specifier_format - Creates and Initialize an array of spec_format sruct
 * Return: The created array
@@ -59,10 +61,11 @@ spec_format *get_specifier_format()
 
 int _printf(const char *format, ...)
 {
-	int j, i, buffer_index = 0, printed_chars = 0;
+	int j, i, buffer_index = 0, printed_chars = 0, flag_count;
 	spec_format *spec = get_specifier_format();
 	char buffer[1024];
 	va_list listPtr;
+	char flags[10];
 
 	if (format == NULL)
 		free(spec), exit(1);
@@ -73,11 +76,17 @@ int _printf(const char *format, ...)
 		{
 			if (format[i] == '\0' || (format[i] == ' ' && format[i + 1] == '\0'))
 				free(spec), exit(1);
+			flag_count = check_flag(format + i);
+			for (j = 0; j < flag_count; j++, i++)
+			{
+				flags[j] = format[i];
+			}
+			flags[j] = '\0';
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
 				if (*(spec[j].specifier) == format[i])
 				{
-					printed_chars += spec[j].func(listPtr, buffer, &buffer_index);
+					printed_chars += spec[j].func(listPtr, buffer, &buffer_index, flags);
 					break;
 				}
 				if (spec[j + 1].specifier == NULL)
@@ -93,4 +102,45 @@ int _printf(const char *format, ...)
 	printed_chars += free_buffer(buffer, &buffer_index);
 	va_end(listPtr), free(spec);
 	return (printed_chars);
+}
+
+/**
+ * check_flag - Checks for flags to cutom the printing format
+ * @str: Is the string that will search for flags in
+ * Return: The number of founded flags
+ */
+
+int check_flag(const char *str)
+{
+	int checker = 1;
+	int flag_count = 0;
+	int i = 0;
+
+	while (checker > 0 && str[i] != '\0')
+	{
+		switch (str[i])
+		{
+
+			case '+':
+				checker++;
+				flag_count++;
+				break;
+
+			case ' ':
+				checker++;
+				flag_count++;
+				break;
+
+			case '#':
+				checker++;
+				flag_count++;
+				break;
+			default:
+				checker = 0;
+
+		}
+		i++;
+	}
+
+	return (flag_count);
 }

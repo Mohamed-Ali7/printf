@@ -44,6 +44,43 @@ int free_buffer(char *buf, int *buf_index)
 	return (index);
 }
 
+
+/**
+ * print_flag_if_exist - Checks for flags to print
+ * @flag: is the flag to check
+ * @buf: Is the buffer to store the printable character
+ * @buf_index: Is the current index of the buffer
+ * Return: The number of printed characters
+ */
+
+int print_flag_if_exist(char *flag, char *buf, int *buf_index)
+{
+	int printed_characters = 0;
+	int i;
+
+	for (i = 0; flag[i] != '\0'; i++)
+	{
+		if (flag[i] == '+')
+		{
+			printed_characters += add_to_buffer(buf, buf_index, '+');
+			flag = NULL;
+			break;
+		}
+	}
+	if (flag != NULL)
+	{
+		for (i = 0; flag[i] != '\0'; i++)
+		{
+			if (flag[i] == ' ')
+			{
+				printed_characters += add_to_buffer(buf, buf_index, ' ');
+				break;
+			}
+		}
+	}
+	return (printed_characters);
+}
+
 /**
 * _len - Calculates the length of a string
 * @s: Is the string to calcualte its length
