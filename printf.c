@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 		{"d", print_int_format}, {"i", print_int_format}, {"b", print_binary_format},
 		{"u", print_unsigned_int_format}, {"o", print_octal_format},
 		{"x", print_lower_hex_format}, {"X", print_upper_hex_format}, {NULL, NULL}};
-	char buffer[BUF_SIZE];
+	char buffer[1024];
 	va_list listPtr;
 	char ch;
 
@@ -31,7 +31,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[++i] != '%')
 		{
-			if (format[i] == '\0')
+			if (format[i] == '\0' || (format[i] == ' ' && format[i + 1] == '\0'))
 				return (-1);
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
@@ -56,22 +56,4 @@ int _printf(const char *format, ...)
 	printed_chars += free_buffer(buffer, &buffer_index);
 	va_end(listPtr);
 	return (printed_chars);
-}
-
-/**
- * free_buffer_if_full - Helper function to check the buffer if full & free it
- * @buffer: Is the buffer to check
- * @buffer_index: Is the current index of the buffer
- * Return: The number of printed characters
- */
-
-int free_buffer_if_full(char *buffer, int *buffer_index)
-{
-	int i = 0;
-
-	if (*buffer_index == 1024)
-	{
-		i += free_buffer(buffer, buffer_index);
-	}
-	return (i);
 }

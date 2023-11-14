@@ -2,7 +2,6 @@
 #define PRINT_F_H
 #include <stdarg.h>
 
-#define BUF_SIZE 1024
 /**
 * struct specifier_format - Is a struct that contains format specifiers
 * and format functions

@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
-#include "stdio.h"
 
 /**
 * print_int_format - Prints the _printf function's argument in int format

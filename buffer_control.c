@@ -1,6 +1,5 @@
 #include<unistd.h>
-
-int free_buffer(char *buf, int *buf_index);
+#include "main.h"
 
 /**
  * add_to_buffer - Add character to the buffer to be printed
