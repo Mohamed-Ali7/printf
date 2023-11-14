@@ -1,6 +1,6 @@
 #include "main.h"
 #include <stdio.h>
-#include <stdint.h>
+
 /**
 * print_add_format - Prints the _printf function's argument in address format
 * @ptr: Is the pointer to the list of arguments of the _printf function
@@ -12,12 +12,34 @@
 int print_add_format(va_list ptr, char *buffer, int *buffer_index)
 {
 	void *address = va_arg(ptr, void *);
-	unsigned long add_val = (uintptr_t) address;
+	unsigned long add_val = (unsigned long) address;
+	int index;
+	unsigned long tmp = add_val;
+	unsigned long divider = 1;
 	int printed_characters = 0;
 	char *hex = "0123456789abcdef";
 
+	if (address == NULL)
+	{
+		printed_characters += add_to_buffer(buffer, buffer_index, "(nil)", 5);
+		return (printed_characters);
+	}
 	printed_characters += add_to_buffer(buffer, buffer_index, "0x", 2);
-	printed_characters += print_hex_format(hex, add_val, buffer, buffer_index);
 
+	while (tmp > 0)
+	{
+		tmp /= 16;
+		if (tmp > 0)
+		{
+			divider *= 16;
+		}
+	}
+
+	while (divider >= 1)
+	{
+		index = (add_val / divider) % 16;
+		printed_characters = add_to_buffer(buffer, buffer_index, &hex[index], 1);
+		divider /= 16;
+	}
 	return (printed_characters);
 }
