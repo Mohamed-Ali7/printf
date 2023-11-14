@@ -104,7 +104,7 @@ int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index)
 	char *str = va_arg(ptr, char *);
 	int i = 0;
 	int printed_characters = 0;
-	char tmp[6] = "(nill)";
+	char tmp[6] = "(NULL)";
 	char c;
 
 	if (str == NULL)
