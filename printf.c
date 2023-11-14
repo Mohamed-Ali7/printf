@@ -93,7 +93,8 @@ int _printf(const char *format, ...)
 		}
 		printed_chars += add_to_buffer(buffer, &buffer_index, (char *)&format[i], 1);
 	}
-	printed_chars += free_buffer(buffer, &buffer_index);
+	if (buffer_index > 0)
+		printed_chars += free_buffer(buffer, &buffer_index);
 	va_end(listPtr), free(spec);
 	return (printed_chars);
 }
