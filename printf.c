@@ -11,7 +11,7 @@
 
 spec_format *get_specifier_format()
 {
-	spec_format *spec = malloc(sizeof(spec_format) * 11);
+	spec_format *spec = malloc(sizeof(spec_format) * 12);
 
 	if (spec == NULL)
 	{
@@ -38,8 +38,10 @@ spec_format *get_specifier_format()
 	spec[8].func = print_upper_hex_format;
 	spec[9].specifier = "S";
 	spec[9].func = print_cus_string_format;
-	spec[10].specifier = NULL;
-	spec[10].func = NULL;
+	spec[10].specifier = "p";
+	spec[10].func = print_add_format;
+	spec[11].specifier = NULL;
+	spec[11].func = NULL;
 	return (spec);
 }
 

@@ -2,7 +2,6 @@
 #include <stdarg.h>
 #include "main.h"
 
-int print_hex_format(char *hex, unsigned int i, char *buff, int *buffer_ind);
 
 /**
 * print_lower_hex_format - Prints the _printf function's argument
@@ -14,7 +13,7 @@ int print_hex_format(char *hex, unsigned int i, char *buff, int *buffer_ind);
 */
 int print_lower_hex_format(va_list ptr, char *buffer, int *buffer_index)
 {
-	unsigned int i = va_arg(ptr, unsigned int);
+	long i = va_arg(ptr, long);
 	char *hex_format = "0123456789abcdef";
 
 	return (print_hex_format(hex_format, i, buffer, buffer_index));
@@ -30,7 +29,7 @@ int print_lower_hex_format(va_list ptr, char *buffer, int *buffer_index)
 */
 int print_upper_hex_format(va_list ptr, char *buffer, int *buffer_index)
 {
-	unsigned int i = va_arg(ptr, unsigned int);
+	long int i = va_arg(ptr, long);
 	char *hex_format = "0123456789ABCDEF";
 
 	return (print_hex_format(hex_format, i, buffer, buffer_index));
@@ -46,10 +45,10 @@ int print_upper_hex_format(va_list ptr, char *buffer, int *buffer_index)
 * Return: The number of printed characters
 */
 
-int print_hex_format(char *hex, unsigned int i, char *buff, int *buffer_ind)
+int print_hex_format(char *hex, long i, char *buff, int *buffer_ind)
 {
-	unsigned int tmp = i;
-	int divider = 1;
+	long tmp = i;
+	long divider = 1;
 	int printed_characters = 0;
 	int index;
 
