@@ -72,11 +72,6 @@ int _printf(const char *format, ...)
 	va_start(listPtr, format);
 	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (buffer_index == -1)
-		{
-			free(spec);
-			return (printed_chars);
-		}
 		if (format[i] == '%' && format[++i] != '%')
 		{
 			if (format[i] == '\0' || (format[i] == ' ' && format[i + 1] == '\0'))

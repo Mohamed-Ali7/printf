@@ -17,12 +17,6 @@ int add_to_buffer(char *buffer, int *buffer_index, char *src, int size)
 
 	for (i = 0; i < size; i++)
 	{
-		if (src[i] == '\0')
-		{
-			printed_characters += free_buffer(buffer, buffer_index);
-			*buffer_index = -1;
-			return (printed_characters);
-		}
 		buffer[*buffer_index] = src[i];
 		*buffer_index = *buffer_index + 1;
 
