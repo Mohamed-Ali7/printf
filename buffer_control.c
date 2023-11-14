@@ -7,7 +7,6 @@
  * @buffer: Is the buffer in usage
  * @buffer_index: Is the current index of the buffer
  * @src: is the character that will be saved in the buffer
- * @size: Is the counti of the characters (src)
  * Return: The number of printed characters
  */
 int add_to_buffer(char *buffer, int *buffer_index, char src)
