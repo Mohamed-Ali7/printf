@@ -2,9 +2,6 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
-#include <stdio.h>
-
-int _len(char *c);
 
 /**
 * print_char_format - Prints the _printf function's argument in char format

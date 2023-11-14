@@ -7,6 +7,8 @@
 * and format functions
 * @specifier: Is the specifier character
 * @func: Is the pointer to a format function
+* Description: Is used to point to invoke format function
+* based on a specifier character
 */
 typedef struct specifier_format
 {
