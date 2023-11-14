@@ -20,7 +20,7 @@ int print_octal_format(va_list ptr, char *buffer, int *buffer_index)
 
 	if (i == 0)
 	{
-		printed_characters += add_to_buffer(buffer, buffer_index, "0", 1);
+		printed_characters += add_to_buffer(buffer, buffer_index, '0');
 		return (printed_characters);
 	}
 
@@ -36,7 +36,7 @@ int print_octal_format(va_list ptr, char *buffer, int *buffer_index)
 	while (divider >= 1)
 	{
 		num = ((i / divider) % 8) + '0';
-		printed_characters += add_to_buffer(buffer, buffer_index, &num, 1);
+		printed_characters += add_to_buffer(buffer, buffer_index, num);
 		divider /= 8;
 	}
 

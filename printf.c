@@ -63,7 +63,6 @@ int _printf(const char *format, ...)
 	spec_format *spec = get_specifier_format();
 	char buffer[1024];
 	va_list listPtr;
-	char ch[2] = "%a";
 
 	if (format == NULL)
 		free(spec), exit(1);
@@ -83,13 +82,13 @@ int _printf(const char *format, ...)
 				}
 				if (spec[j + 1].specifier == NULL)
 				{
-					ch[1] = format[i];
-					printed_chars += add_to_buffer(buffer, &buffer_index, ch, 2);
+					printed_chars += add_to_buffer(buffer, &buffer_index, format[i - 1]);
+					printed_chars += add_to_buffer(buffer, &buffer_index, format[i]);
 				}
 			}
 			continue;
 		}
-		printed_chars += add_to_buffer(buffer, &buffer_index, (char *)&format[i], 1);
+		printed_chars += add_to_buffer(buffer, &buffer_index, format[i]);
 	}
 	printed_chars += free_buffer(buffer, &buffer_index);
 	va_end(listPtr), free(spec);

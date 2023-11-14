@@ -18,13 +18,18 @@ int print_add_format(va_list ptr, char *buffer, int *buffer_index)
 	unsigned long divider = 1;
 	int printed_characters = 0;
 	char *hex = "0123456789abcdef";
+	char *non = "(nil)";
 
 	if (address == NULL)
 	{
-		printed_characters += add_to_buffer(buffer, buffer_index, "(nil)", 5);
+		for (index = 0; non[index] != '\0'; index++)
+		{
+			printed_characters += add_to_buffer(buffer, buffer_index, non[index]);
+		}
 		return (printed_characters);
 	}
-	printed_characters += add_to_buffer(buffer, buffer_index, "0x", 2);
+	printed_characters += add_to_buffer(buffer, buffer_index, '0');
+	printed_characters += add_to_buffer(buffer, buffer_index, 'x');
 
 	while (tmp > 0)
 	{
@@ -38,7 +43,7 @@ int print_add_format(va_list ptr, char *buffer, int *buffer_index)
 	while (divider >= 1)
 	{
 		index = (add_val / divider) % 16;
-		printed_characters = add_to_buffer(buffer, buffer_index, &hex[index], 1);
+		printed_characters = add_to_buffer(buffer, buffer_index, hex[index]);
 		divider /= 16;
 	}
 	return (printed_characters);

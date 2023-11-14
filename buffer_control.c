@@ -6,26 +6,23 @@
  * add_to_buffer - Add character to the buffer to be printed
  * @buffer: Is the buffer in usage
  * @buffer_index: Is the current index of the buffer
- * @src: are the characters that will be saved in the buffer
+ * @src: is the character that will be saved in the buffer
  * @size: Is the counti of the characters (src)
  * Return: The number of printed characters
  */
-int add_to_buffer(char *buffer, int *buffer_index, char *src, int size)
+int add_to_buffer(char *buffer, int *buffer_index, char src)
 {
-	int i;
 	int printed_characters = 0;
 
-	for (i = 0; i < size; i++)
+	buffer[*buffer_index] = src;
+	*buffer_index = *buffer_index + 1;
+
+	if (*buffer_index == 1024)
 	{
-		buffer[*buffer_index] = src[i];
-		*buffer_index = *buffer_index + 1;
+		printed_characters += free_buffer(buffer, buffer_index);
 
-		if (*buffer_index == 1024)
-		{
-			printed_characters += free_buffer(buffer, buffer_index);
-
-		}
 	}
+
 	return (printed_characters);
 }
 

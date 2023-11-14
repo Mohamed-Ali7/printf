@@ -19,7 +19,7 @@ int print_binary_format(va_list ptr, char *buffer, int *buffer_index)
 
 	if (val == 0)
 	{
-		printed_characters = add_to_buffer(buffer, buffer_index, "0", 1);
+		printed_characters = add_to_buffer(buffer, buffer_index, '0');
 		return (printed_characters);
 	}
 
@@ -35,7 +35,7 @@ int print_binary_format(va_list ptr, char *buffer, int *buffer_index)
 	while (divider >= 1)
 	{
 		bit = ((tmp / divider) % 2) + '0';
-		printed_characters = add_to_buffer(buffer, buffer_index, &bit, 1);
+		printed_characters = add_to_buffer(buffer, buffer_index, bit);
 		divider /= 2;
 	}
 

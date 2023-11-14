@@ -27,7 +27,7 @@ int print_unsigned_int_format(va_list ptr, char *buffer, int *buffer_index);
 int print_octal_format(va_list ptr, char *buffer, int *buffer_index);
 int print_lower_hex_format(va_list ptr, char *buffer, int *buffer_index);
 int print_upper_hex_format(va_list ptr, char *buffer, int *buffer_index);
-int add_to_buffer(char *buffer, int *buffer_index, char *src, int size);
+int add_to_buffer(char *buffer, int *buffer_index, char src);
 int free_buffer(char *buf, int *buf_index);
 int print_hex_format(char *hex, unsigned int i, char *buff, int *buff_index);
 int print_cus_string_format(va_list ptr, char *buffer, int *buffer_index);

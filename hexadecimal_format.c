@@ -54,7 +54,7 @@ int print_hex_format(char *hex, unsigned int i, char *buff, int *buffer_ind)
 
 	if (i == 0)
 	{
-		printed_characters = add_to_buffer(buff, buffer_ind, "0", 1);
+		printed_characters = add_to_buffer(buff, buffer_ind, '0');
 		return (printed_characters);
 	}
 
@@ -70,7 +70,7 @@ int print_hex_format(char *hex, unsigned int i, char *buff, int *buffer_ind)
 	while (divider >= 1)
 	{
 		index = (i / divider) % 16;
-		printed_characters = add_to_buffer(buff, buffer_ind, &hex[index], 1);
+		printed_characters = add_to_buffer(buff, buffer_ind, hex[index]);
 		divider /= 16;
 	}
 	return (printed_characters);

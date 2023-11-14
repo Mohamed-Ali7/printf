@@ -18,7 +18,7 @@ int print_char_format(va_list ptr, char *buffer, int *buffer_index)
 	char c = va_arg(ptr, int);
 	int printed_characters = 0;
 
-	printed_characters += add_to_buffer(buffer, buffer_index, &c, 1);
+	printed_characters += add_to_buffer(buffer, buffer_index, c);
 
 	return (printed_characters);
 }
@@ -33,7 +33,7 @@ int print_char_format(va_list ptr, char *buffer, int *buffer_index)
 int print_string_format(va_list ptr, char *buffer, int *buffer_index)
 {
 	char *str = va_arg(ptr, void *);
-	int length;
+	int i;
 	int printed_characters = 0;
 
 	if (str == NULL)
@@ -41,10 +41,10 @@ int print_string_format(va_list ptr, char *buffer, int *buffer_index)
 		str = "(null)";
 	}
 
-	length = _len(str);
-
-	printed_characters += add_to_buffer(buffer, buffer_index, str, length);
-
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		printed_characters += add_to_buffer(buffer, buffer_index, str[i]);
+	}
 	return (printed_characters);
 }
 
@@ -72,17 +72,18 @@ int print_cus_string_format(va_list ptr, char *buffer, int *buffer_index)
 	{
 		if (str[i] < 32 || str[i] >= 127)
 		{
-			printed_characters += add_to_buffer(buffer, buffer_index, "\\x", 2);
+			printed_characters += add_to_buffer(buffer, buffer_index, '\\');
+			printed_characters += add_to_buffer(buffer, buffer_index, 'x');
 			if (str[i] <= 16)
 			{
-				printed_characters += add_to_buffer(buffer, buffer_index, "0", 1);
+				printed_characters += add_to_buffer(buffer, buffer_index, '0');
 			}
 			print_hex_format(hex, (unsigned int) str[i], buffer, buffer_index);
 			i++;
 		}
 		else
 		{
-			printed_characters += add_to_buffer(buffer, buffer_index, &str[i], 1);
+			printed_characters += add_to_buffer(buffer, buffer_index, str[i]);
 			i++;
 		}
 	}
@@ -130,7 +131,7 @@ int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index)
 			}
 			c += 13;
 		}
-		printed_characters += add_to_buffer(buffer, buffer_index, &c, 1);
+		printed_characters += add_to_buffer(buffer, buffer_index, c);
 		i++;
 	}
 	return (printed_characters);
@@ -163,7 +164,7 @@ int print_rev_string_format(va_list ptr, char *buffer, int *buffer_index)
 	{
 		c = str[str_len - 1];
 
-		printed_characters += add_to_buffer(buffer, buffer_index, &c, 1);
+		printed_characters += add_to_buffer(buffer, buffer_index, c);
 		str_len--;
 	}
 	return (printed_characters);

@@ -19,12 +19,12 @@ int print_int_format(va_list ptr, char *buffer, int *buffer_index)
 
 	if (i == 0)
 	{
-		printed_characters += add_to_buffer(buffer, buffer_index, "0", 1);
+		printed_characters += add_to_buffer(buffer, buffer_index, '0');
 		return (printed_characters);
 	}
 	if (i < 0)
 	{
-		printed_characters += add_to_buffer(buffer, buffer_index, "-", 1);
+		printed_characters += add_to_buffer(buffer, buffer_index, '-');
 		tmp *= -1;
 	}
 	while (tmp != 0)
@@ -35,7 +35,7 @@ int print_int_format(va_list ptr, char *buffer, int *buffer_index)
 	}
 	while (x >= 1)
 	{
-		printed_characters += add_to_buffer(buffer, buffer_index, &nums[x - 1], 1);
+		printed_characters += add_to_buffer(buffer, buffer_index, nums[x - 1]);
 		x--;
 	}
 
@@ -57,12 +57,11 @@ int print_unsigned_int_format(va_list ptr, char *buffer, int *buffer_index)
 	unsigned int tmp = i;
 	int divider = 1;
 	int printed_characters = 0;
-	char nums[10];
-	int length = 0;
+	char num;
 
 	if (i == 0)
 	{
-		printed_characters += add_to_buffer(buffer, buffer_index, "0", 1);
+		printed_characters += add_to_buffer(buffer, buffer_index, '0');
 		return (printed_characters);
 	}
 
@@ -77,11 +76,10 @@ int print_unsigned_int_format(va_list ptr, char *buffer, int *buffer_index)
 
 	while (divider >= 1)
 	{
-		nums[length] = ((i / divider) % 10) + '0';
-		length++;
+		num = ((i / divider) % 10) + '0';
+		printed_characters += add_to_buffer(buffer, buffer_index, num);
 		divider /= 10;
 	}
 
-	printed_characters += add_to_buffer(buffer, buffer_index, nums, length);
 	return (printed_characters);
 }
