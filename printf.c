@@ -65,7 +65,7 @@ int _printf(const char *format, ...)
 	spec_format *spec = get_specifier_format();
 	char buffer[1024];
 	va_list listPtr;
-	char flags[10];
+	char flags[50];
 
 	if (format == NULL)
 		free(spec), exit(1);

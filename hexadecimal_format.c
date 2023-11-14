@@ -74,7 +74,10 @@ int print_hex_format(char *hx, unsigned int i, char *bf, int *bf_n, char *flg)
 		if (flg[index] == '#')
 		{
 			printed_characters = add_to_buffer(bf, bf_n, '0');
-			printed_characters = add_to_buffer(bf, bf_n, 'x');
+			if (hx[10] == 'A')
+				printed_characters = add_to_buffer(bf, bf_n, 'X');
+			else
+				printed_characters = add_to_buffer(bf, bf_n, 'x');
 			break;
 		}
 	}
