@@ -32,7 +32,7 @@ int print_char_format(va_list ptr, char *buffer, int *buffer_index)
 */
 int print_string_format(va_list ptr, char *buffer, int *buffer_index)
 {
-	char *str = va_arg(ptr, void *);
+	char *str = va_arg(ptr, char *);
 	int i;
 	int printed_characters = 0;
 
