@@ -89,6 +89,39 @@ int print_cus_string_format(va_list ptr, char *buffer, int *buffer_index)
 }
 
 /**
+* print_rot13_string_format - Prints the _printf function's string argument
+* encoded into rot13.
+*
+* @ptr: Is the pointer to the list of arguments of the _printf function
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
+* Return: The number of printed characters
+*/
+int print_rot13_string_format(va_list ptr, char *buffer, int *buffer_index)
+{
+	char *s = va_arg(ptr, char *);
+	int i = 0;
+	int printed_characters = 0;
+
+	while (s[i] != '\0')
+	{
+		while ((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z'))
+		{
+			if ((s[i] < 'Z' && (s[i] + 13) > 'Z') || (s[i] >= 'a' && (s[i] + 13) > 'z'))
+			{
+				s[i] -= 26;
+			}
+			s[i] = s[i] + 13;
+			i++;
+		}
+
+		i++;
+	}
+	printed_characters += add_to_buffer(buffer, buffer_index, s, i);
+	return (printed_characters);
+}
+
+/**
 * _len - Calculates the length of a string
 * @s: Is the string to calcualte its length
 * Return: The length of the string (s)

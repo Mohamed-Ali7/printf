@@ -11,7 +11,7 @@
 
 spec_format *get_specifier_format()
 {
-	spec_format *spec = malloc(sizeof(spec_format) * 12);
+	spec_format *spec = malloc(sizeof(spec_format) * 13);
 
 	if (spec == NULL)
 	{
@@ -40,8 +40,10 @@ spec_format *get_specifier_format()
 	spec[9].func = print_cus_string_format;
 	spec[10].specifier = "p";
 	spec[10].func = print_add_format;
-	spec[11].specifier = NULL;
-	spec[11].func = NULL;
+	spec[11].specifier = "R";
+	spec[11].func = print_rot13_string_format;
+	spec[12].specifier = NULL;
+	spec[12].func = NULL;
 	return (spec);
 }
 
