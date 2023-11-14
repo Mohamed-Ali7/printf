@@ -20,7 +20,7 @@ int add_to_buffer(char *buffer, int *buffer_index, char *src, int size)
 		buffer[*buffer_index] = src[i];
 		*buffer_index = *buffer_index + 1;
 
-		if (*buffer_index == 1024)
+		if (*buffer_index == BUFF_SIZE)
 		{
 			printed_characters += free_buffer(buffer, buffer_index);
 
