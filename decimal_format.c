@@ -60,13 +60,14 @@ int print_unsigned_int_format(va_list p, char *buf, int *buf_ind, char *flags)
 	int divider = 1;
 	int printed_characters = 0;
 	char num;
-	(void) (flags);
 
 	if (i == 0)
 	{
 		printed_characters += add_to_buffer(buf, buf_ind, '0');
+		printed_characters += print_flag_if_exist(flags, buf, buf_ind);
 		return (printed_characters);
 	}
+	printed_characters += print_flag_if_exist(flags, buf, buf_ind);
 	while (tmp > 0)
 	{
 		tmp /= 10;
