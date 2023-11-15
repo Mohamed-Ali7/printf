@@ -51,7 +51,7 @@ int print_upper_long_hex(va_list ptr, char *buf, int *buf_ind, char *flag)
 int print_long_hex(char *hx, long int i, char *bf, int *bf_n, char *flg)
 {
 	long tmp = i;
-	long divider = 1;
+	unsigned long divider = 1;
 	int printed_characters = 0;
 	int index;
 

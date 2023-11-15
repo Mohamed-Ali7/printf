@@ -52,7 +52,7 @@ int print_upper_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag)
 int print_short_hex(char *hx, long int i, char *bf, int *bf_n, char *flg)
 {
 	short tmp = i;
-	short divider = 1;
+	int divider = 1;
 	int printed_characters = 0;
 	int index;
 

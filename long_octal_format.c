@@ -14,9 +14,9 @@
 
 int print_long_octal(va_list ptr, char *buf, int *buf_ind, char *flag)
 {
-	long i = va_arg(ptr, long);
-	long tmp = i;
-	long divider = 1;
+	unsigned long i = va_arg(ptr, unsigned long);
+	unsigned long tmp = i;
+	unsigned long divider = 1;
 	int printed_characters = 0;
 	char num;
 	int x;

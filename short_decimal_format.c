@@ -58,7 +58,7 @@ int print_short_int_format(va_list ptr, char *buf, int *buf_ind, char *flags)
 {
 	short i = va_arg(ptr, int);
 	int x = 0;
-	short tmp = i;
+	unsigned short tmp = i;
 	int printed_characters = 0;
 	char nums[32];
 

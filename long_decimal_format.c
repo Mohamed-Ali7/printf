@@ -16,7 +16,7 @@ int print_unsigned_long_int(va_list p, char *buf, int *buf_ind, char *flags)
 {
 	unsigned long i = va_arg(p, unsigned long);
 	unsigned long tmp = i;
-	long divider = 1;
+	unsigned long divider = 1;
 	int printed_characters = 0;
 	char num;
 	(void) (flags);
@@ -58,7 +58,7 @@ int print_long_int_format(va_list ptr, char *buf, int *buf_ind, char *flags)
 {
 	long i = va_arg(ptr, long);
 	int x = 0;
-	long tmp = i;
+	unsigned long tmp = i;
 	int printed_characters = 0;
 	char nums[32];
 
