@@ -53,3 +53,4 @@ int print_long_octal(va_list ptr, char *buf, int *buf_ind, char *flag)
 
 	return (printed_characters);
 }
+

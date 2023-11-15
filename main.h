@@ -49,3 +49,4 @@ int print_lower_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag);
 int _len(char *c);
 
 #endif
+

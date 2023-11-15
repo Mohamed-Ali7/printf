@@ -86,3 +86,4 @@ int print_short_int_format(va_list ptr, char *buf, int *buf_ind, char *flags)
 		printed_characters += add_to_buffer(buf, buf_ind, nums[--x]);
 	return (printed_characters);
 }
+

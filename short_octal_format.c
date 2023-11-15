@@ -1,10 +1,9 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
-#include <stdio.h>
 
 /**
-* print_long_octal - Prints the _printf function's argument in short octal
+* print_short_octal - Prints the _printf function's argument in short octal
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
@@ -53,3 +52,4 @@ int print_short_octal(va_list ptr, char *buf, int *buf_ind, char *flag)
 
 	return (printed_characters);
 }
+

@@ -150,3 +150,4 @@ int check_flag(const char *str)
 
 	return (flag_count);
 }
+

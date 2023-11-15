@@ -176,3 +176,4 @@ int print_rev_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
 	}
 	return (printed_characters);
 }
+

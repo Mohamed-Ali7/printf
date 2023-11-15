@@ -90,3 +90,4 @@ int print_hex_format(char *hx, unsigned int i, char *bf, int *bf_n, char *flg)
 	}
 	return (printed_characters);
 }
+

@@ -22,7 +22,7 @@ int print_lower_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag)
 }
 
 /**
-* print_short_upper_hex - Prints the _printf function's argument
+* print_upper_short_hex - Prints the _printf function's argument
 * in upper short hexadecimal format
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
@@ -91,3 +91,4 @@ int print_short_hex(char *hx, long int i, char *bf, int *bf_n, char *flg)
 	}
 	return (printed_characters);
 }
+

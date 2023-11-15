@@ -97,3 +97,4 @@ int _len(char *s)
 	}
 	return (i);
 }
+
