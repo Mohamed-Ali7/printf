@@ -63,8 +63,9 @@ int _printf(const char *format, ...)
 {
 	int j, i, buf_ind = 0, printed_chars = 0, flag_count, wid;
 	spec_format *spec = get_specifier_format();
-	char buffer[1024], flag[50];
+	char buffer[1024], flag[150];
 	va_list listPtr;
+	char ch;
 
 	if (format == NULL)
 		free(spec), exit(1);
@@ -86,18 +87,16 @@ int _printf(const char *format, ...)
 			{
 				if (spec[j].specifier[0] == format[i])
 				{
-					if (spec[j].specifier[1] != '\0')
+					ch = spec[j].specifier[1];
+					if (ch != '\0' && ch == format[i + 1])
 					{
-					if (spec[j].specifier[1] == format[i + 1])
-						{
-						printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid);
 						i++;
-						break;
-						}
-					continue;
-					}
-					else
 						printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid);
+						break;
+					}
+					else if (ch != '\0' && ch != format[i + 1])
+						continue;
+					printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid);
 					break;
 				}
 				if (spec[j + 1].specifier == NULL)
