@@ -3,7 +3,7 @@
 #include "main.h"
 
 /**
-* print_unsigned_short_int - Prints the _printf function's argument
+* unsigned_short_int - Prints the _printf function's argument
 * in unsigned short int format
 * @p: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
@@ -12,17 +12,21 @@
 * Return: The number of printed characters
 */
 
-int print_unsigned_short_int(va_list p, char *buf, int *buf_ind, char *flags)
+int unsigned_short_int(va_list p, char *buf, int *buf_ind, char *flags, int w)
 {
 	unsigned short i = va_arg(p, int);
 	unsigned short tmp = i;
 	int divider = 1;
-	int printed_characters = 0;
+	int printed_characters = 0, x, len = 0, remind;
 	char num;
 	(void) (flags);
 
 	if (i == 0)
 	{
+		for (x = 0; x < w - 1; x++)
+		{
+			printed_characters += add_to_buffer(buf, buf_ind, ' ');
+		}
 		printed_characters += add_to_buffer(buf, buf_ind, '0');
 		return (printed_characters);
 	}
@@ -33,6 +37,12 @@ int print_unsigned_short_int(va_list p, char *buf, int *buf_ind, char *flags)
 		{
 			divider *= 10;
 		}
+		len++;
+	}
+	remind = w - len;
+	for (x = 0; x < remind; x++)
+	{
+		printed_characters += add_to_buffer(buf, buf_ind, ' ');
 	}
 
 	while (divider >= 1)
@@ -46,7 +56,7 @@ int print_unsigned_short_int(va_list p, char *buf, int *buf_ind, char *flags)
 }
 
 /**
-* print_short_int_format - Prints the _printf function's argument
+* short_int_format - Prints the _printf function's argument
 * in long int format
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
@@ -54,34 +64,38 @@ int print_unsigned_short_int(va_list p, char *buf, int *buf_ind, char *flags)
 * @flags: Are the flags to check for custom print
 * Return: The number of printed characters
 */
-int print_short_int_format(va_list ptr, char *buf, int *buf_ind, char *flags)
+int short_int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
 {
 	short i = va_arg(ptr, int);
 	int x = 0;
 	unsigned short tmp = i;
-	int printed_characters = 0;
+	int printed_characters = 0, is_neg = 0;
 	char nums[32];
 
 	if (i == 0)
 	{
+		printed_characters += print_flag_if_exist(flags, buf, buf_ind, w, 1, 0);
 		printed_characters += add_to_buffer(buf, buf_ind, '0');
-		printed_characters += print_flag_if_exist(flags, buf, buf_ind);
 		return (printed_characters);
 	}
 	if (i < 0)
 	{
-		printed_characters += add_to_buffer(buf, buf_ind, '-');
+		is_neg = 1;
 		tmp *= -1;
 	}
-	else
-	{
-		printed_characters += print_flag_if_exist(flags, buf, buf_ind);
-	}
+
 	for (x = 0; tmp != 0; x++)
 	{
 		nums[x] = (tmp % 10) + '0';
 		tmp = tmp / 10;
 	}
+
+	printed_characters += print_flag_if_exist(flags, buf, buf_ind, w, x, is_neg);
+	if(is_neg)
+	{
+		printed_characters += add_to_buffer(buf, buf_ind, '-');
+	}
+
 	while (x >= 1)
 		printed_characters += add_to_buffer(buf, buf_ind, nums[--x]);
 	return (printed_characters);

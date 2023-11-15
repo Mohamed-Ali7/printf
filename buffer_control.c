@@ -1,7 +1,7 @@
 #include<unistd.h>
 #include "main.h"
 #include <stdlib.h>
-
+#include <stdio.h>
 /**
  * add_to_buffer - Add character to the buffer to be printed
  * @buffer: Is the buffer in usage
@@ -53,31 +53,47 @@ int free_buffer(char *buf, int *buf_index)
  * Return: The number of printed characters
  */
 
-int print_flag_if_exist(char *flag, char *buf, int *buf_index)
+int print_flag_if_exist(char *f, char *bf, int *bf_n, int w, int l, int is_ng)
 {
 	int printed_characters = 0;
 	int i;
+	int remind = w - l;
 
-	for (i = 0; flag[i] != '\0'; i++)
+	if(is_ng)
+		remind--;
+
+	for (i = 0; i < remind; i++)
 	{
-		if (flag[i] == '+')
+		printed_characters += add_to_buffer(bf, bf_n, ' ');
+	}
+	for (i = 0; f[i] != '\0'; i++)
+	{
+		if (f[i] == '+')
 		{
-			printed_characters += add_to_buffer(buf, buf_index, '+');
-			flag = NULL;
+			if (!is_ng)
+			{
+				if (remind > 0)
+					*bf_n = *bf_n - 1;
+				printed_characters += add_to_buffer(bf, bf_n, '+');
+			}
+			f = NULL;
 			break;
 		}
 	}
-	if (flag != NULL)
+	if (f != NULL)
 	{
-		for (i = 0; flag[i] != '\0'; i++)
+		for (i = 0; f[i] != '\0'; i++)
 		{
-			if (flag[i] == ' ')
+			if (f[i] == ' ')
 			{
-				printed_characters += add_to_buffer(buf, buf_index, ' ');
+				if (remind > 0)
+					*bf_n = *bf_n - 1;
+				printed_characters += add_to_buffer(bf, bf_n, ' ');
 				break;
 			}
 		}
 	}
+		
 	return (printed_characters);
 }
 

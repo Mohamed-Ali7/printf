@@ -6,18 +6,19 @@
 #include <stdlib.h>
 
 /**
-* print_char_format - Prints the _printf function's argument in char format
+* char_format - Prints the _printf function's argument in char format
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
 * Return: The number of printed characters
 */
-int print_char_format(va_list ptr, char *buf, int *buf_ind, char *flag)
+int char_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
 	char c = va_arg(ptr, int);
 	int printed_characters = 0;
 	(void) (flag);
+	(void) (w);
 
 	printed_characters += add_to_buffer(buf, buf_ind, c);
 
@@ -25,19 +26,20 @@ int print_char_format(va_list ptr, char *buf, int *buf_ind, char *flag)
 }
 
 /**
-* print_string_format - Prints the _printf function's argument in string format
+* string_format - Prints the _printf function's argument in string format
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
 * Return: The number of printed characters
 */
-int print_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
+int string_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
 {
 	char *str = va_arg(ptr, char *);
 	int i;
 	int printed_characters = 0;
-	(void) (flag);
+	(void) (fl);
+	(void) (w);
 
 	if (str == NULL)
 	{
@@ -52,20 +54,21 @@ int print_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
 }
 
 /**
-* print_cus_string_format - Prints the _printf function's argument
+* cus_string_format - Prints the _printf function's argument
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
 * Return: The number of printed characters
 */
-int print_cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
+int cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
 	char *str = va_arg(ptr, void *);
 	int printed_characters = 0;
 	int i = 0;
 	char *hex = "0123456789ABCDEF";
 	(void) (flag);
+	(void) (w);
 
 	if (str == NULL)
 	{
@@ -82,7 +85,7 @@ int print_cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
 			{
 				printed_characters += add_to_buffer(buf, buf_ind, '0');
 			}
-			print_hex_format(hex, (unsigned int) str[i], buf, buf_ind, "");
+			hex_format(hex, (unsigned int) str[i], buf, buf_ind, "", 0);
 			i++;
 		}
 		else
@@ -96,7 +99,7 @@ int print_cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
 }
 
 /**
-* print_rot13_string_format - Prints the _printf function's string argument
+* rot13_string_format - Prints the _printf function's string argument
 * encoded into rot13.
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
@@ -105,13 +108,14 @@ int print_cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
 * Return: The number of printed characters
 */
 
-int print_rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
+int rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
 	char *str = va_arg(ptr, char *);
 	int i = 0;
 	int printed_characters = 0;
 	char c;
 	(void) (flag);
+	(void) (w);
 
 	if (str == NULL)
 	{
@@ -144,7 +148,7 @@ int print_rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
 }
 
 /**
-* print_rev_string_format - Prints the _printf function's string argument
+* rev_string_format - Prints the _printf function's string argument
 * in reveresed
 *
 * @ptr: Is the pointer to the list of arguments of the _printf function
@@ -153,13 +157,14 @@ int print_rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
 * @flag: Are the flags to check for custom print
 * Return: The number of printed characters
 */
-int print_rev_string_format(va_list ptr, char *buf, int *buf_ind, char *flag)
+int rev_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
 	char *str = va_arg(ptr, char *);
 	int printed_characters = 0;
 	char c;
 	int str_len;
 	(void) (flag);
+	(void) (w);
 
 	if (str == NULL)
 	{
