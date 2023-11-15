@@ -82,8 +82,6 @@ int _printf(const char *format, ...)
 			}
 			flag[j] = '\0';
 			wid = width(format, listPtr, &i);
-			if (format[i] == '\0' || (format[i] == ' ' && format[i + 1] == '\0'))
-				free(spec), exit(1);
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
 				if (spec[j].specifier[0] == format[i])
