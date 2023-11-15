@@ -7,6 +7,7 @@
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 
@@ -25,7 +26,6 @@ int add_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 		return (printed_characters);
 	}
 
-	
 	while (tmp > 0)
 	{
 		tmp /= 16;

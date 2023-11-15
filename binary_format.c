@@ -6,7 +6,8 @@
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
-* @flag: Are the flags to check for custom print
+* @fl: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 

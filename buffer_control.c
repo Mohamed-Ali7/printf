@@ -47,9 +47,12 @@ int free_buffer(char *buf, int *buf_index)
 
 /**
  * print_flag_if_exist - Checks for flags to print
- * @flag: is the flag to check
- * @buf: Is the buffer to store the printable character
- * @buf_index: Is the current index of the buffer
+ * @f: is the flag to check
+ * @bf: Is the buffer to store the printable character
+ * @bf_n: Is the current index of the buffer
+ * @w: Is the width of the specifier
+ * @l: Is the len of the variable which is being refered to by the specifier
+ * @is_ng: To clear whether the number is negative or not
  * Return: The number of printed characters
  */
 
@@ -59,7 +62,7 @@ int print_flag_if_exist(char *f, char *bf, int *bf_n, int w, int l, int is_ng)
 	int i;
 	int remind = w - l;
 
-	if(is_ng)
+	if (is_ng)
 		remind--;
 
 	for (i = 0; i < remind; i++)
@@ -93,7 +96,6 @@ int print_flag_if_exist(char *f, char *bf, int *bf_n, int w, int l, int is_ng)
 			}
 		}
 	}
-		
 	return (printed_characters);
 }
 

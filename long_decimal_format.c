@@ -9,7 +9,8 @@
 * @p: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
-* @flags: Are the flags to check for custom print
+* @flag: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 
@@ -63,6 +64,7 @@ int unsigned_long_int(va_list p, char *buf, int *buf_ind, char *flag, int w)
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flags: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 int long_int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
@@ -92,7 +94,7 @@ int long_int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
 	}
 
 	printed_characters += print_flag_if_exist(flags, buf, buf_ind, w, x, is_neg);
-	if(is_neg)
+	if (is_neg)
 	{
 		printed_characters += add_to_buffer(buf, buf_ind, '-');
 	}

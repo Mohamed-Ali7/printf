@@ -4,12 +4,13 @@
 
 
 /**
-* ower_hex_format - Prints the _printf function's argument
+* lower_hex_format - Prints the _printf function's argument
 * in lower hexadecimal format
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 int lower_hex_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
@@ -27,6 +28,7 @@ int lower_hex_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 int upper_hex_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
@@ -38,13 +40,14 @@ int upper_hex_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 }
 
 /**
-* print_hex_format - Prints the _printf function's argument
+* hex_format - Prints the _printf function's argument
 * in hexadecimal format
 * @hx: Is the hex format in upper or lower letters
 * @i: Is the number to print its hexadecimal format
 * @bf: Is the buffer to store the printable character
 * @bf_n: Is the current index of the buffer
-* @flg: Are the flags to check for custom print
+* @f: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 
@@ -72,8 +75,8 @@ int hex_format(char *hx, unsigned int i, char *bf, int *bf_n, char *f, int w)
 	{
 		if (f[index] == '#')
 		{
-			for(index = 0; remind > 0 && index < 2; index++, remind--)
-				*bf_n = *bf_n - 1;			
+			for (index = 0; remind > 0 && index < 2; index++, remind--)
+				*bf_n = *bf_n - 1;
 			printed_characters += add_to_buffer(bf, bf_n, '0');
 			if (hx[10] == 'A')
 				printed_characters += add_to_buffer(bf, bf_n, 'X');

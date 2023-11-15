@@ -11,6 +11,7 @@
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 int char_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
@@ -30,7 +31,8 @@ int char_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
-* @flag: Are the flags to check for custom print
+* @fl: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 int string_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
@@ -59,6 +61,7 @@ int string_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 int cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
@@ -104,17 +107,18 @@ int cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
-* @flag: Are the flags to check for custom print
+* @flg: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 
-int rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
+int rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flg, int w)
 {
 	char *str = va_arg(ptr, char *);
 	int i = 0;
 	int printed_characters = 0;
 	char c;
-	(void) (flag);
+	(void) (flg);
 	(void) (w);
 
 	if (str == NULL)
@@ -155,6 +159,7 @@ int rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 int rev_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)

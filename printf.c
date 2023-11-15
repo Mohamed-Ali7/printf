@@ -7,7 +7,7 @@
 
 
 int check_flag(const char *str);
-int width(const char* str, va_list ptr, int *format_index);
+int width(const char *str, va_list ptr, int *format_index);
 
 /**
 * get_specifier_format - Creates and Initialize an array of spec_format sruct
@@ -61,9 +61,9 @@ spec_format *get_specifier_format()
 
 int _printf(const char *format, ...)
 {
-	int j, i, buffer_index = 0, printed_chars = 0, flag_count, wid;
+	int j, i, buf_ind = 0, printed_chars = 0, flag_count, wid;
 	spec_format *spec = get_specifier_format();
-	char buffer[1024], flags[50];
+	char buffer[1024], flag[50];
 	va_list listPtr;
 
 	if (format == NULL)
@@ -78,9 +78,9 @@ int _printf(const char *format, ...)
 			flag_count = check_flag(format + i);
 			for (j = 0; j < flag_count; j++, i++)
 			{
-				flags[j] = format[i];
+				flag[j] = format[i];
 			}
-			flags[j] = '\0';
+			flag[j] = '\0';
 			wid = width(format, listPtr, &i);
 			if (format[i] == '\0' || (format[i] == ' ' && format[i + 1] == '\0'))
 				free(spec), exit(1);
@@ -88,37 +88,43 @@ int _printf(const char *format, ...)
 			{
 				if (spec[j].specifier[0] == format[i])
 				{
-					
 					if (spec[j].specifier[1] != '\0')
 					{
-						if (spec[j].specifier[1] == format[i + 1])
+					if (spec[j].specifier[1] == format[i + 1])
 						{
-							printed_chars += spec[j].func(listPtr, buffer, &buffer_index, flags, wid);
-							i++;
-							break;
+						printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid);
+						i++;
+						break;
 						}
-						continue;
+					continue;
 					}
-					else 
-						printed_chars += spec[j].func(listPtr, buffer, &buffer_index, flags, wid);
+					else
+						printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid);
 					break;
 				}
 				if (spec[j + 1].specifier == NULL)
 				{
-					printed_chars += add_to_buffer(buffer, &buffer_index, format[i - 1]);
-					printed_chars += add_to_buffer(buffer, &buffer_index, format[i]);
+					printed_chars += add_to_buffer(buffer, &buf_ind, format[i - 1]);
+					printed_chars += add_to_buffer(buffer, &buf_ind, format[i]);
 				}
 			}
 			continue;
 		}
-		printed_chars += add_to_buffer(buffer, &buffer_index, format[i]);
+		printed_chars += add_to_buffer(buffer, &buf_ind, format[i]);
 	}
-	printed_chars += free_buffer(buffer, &buffer_index);
+	printed_chars += free_buffer(buffer, &buf_ind);
 	va_end(listPtr), free(spec);
 	return (printed_chars);
 }
 
-int width(const char* str, va_list ptr, int *index)
+/**
+ * width - fetch the width of the specifier of the format string
+ * @str: Is the format string
+ * @ptr: Is the pointer to _printf funtion arguments
+ * @index: Is the current index of the format string (str)
+ * Return: The width of the variable
+ */
+int width(const char *str, va_list ptr, int *index)
 {
 	int wid = 0;
 
@@ -128,7 +134,7 @@ int width(const char* str, va_list ptr, int *index)
 		*index = *index + 1;
 		return (wid);
 	}
-	while (str[*index] != '\0' && (str[*index]>= '0' && str[*index] <= '9'))
+	while (str[*index] != '\0' && (str[*index] >= '0' && str[*index] <= '9'))
 	{
 		wid *= 10;
 		wid += (str[*index] - '0');

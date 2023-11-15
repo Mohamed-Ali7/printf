@@ -10,6 +10,7 @@
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 int lower_long_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
@@ -27,6 +28,7 @@ int lower_long_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 int upper_long_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
@@ -45,6 +47,7 @@ int upper_long_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * @bf: Is the buffer to store the printable character
 * @bf_n: Is the current index of the buffer
 * @flg: Are the flags to check for custom print
+* @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 
@@ -73,8 +76,8 @@ int long_hex(char *hx, long int i, char *bf, int *bf_n, char *flg, int w)
 	{
 		if (flg[index] == '#')
 		{
-			for(index = 0; remind > 0 && index < 2; index++, remind--)
-				*bf_n = *bf_n - 1;			
+			for (index = 0; remind > 0 && index < 2; index++, remind--)
+				*bf_n = *bf_n - 1;
 			printed_characters += add_to_buffer(bf, bf_n, '0');
 			if (hx[10] == 'A')
 				printed_characters += add_to_buffer(bf, bf_n, 'X');
