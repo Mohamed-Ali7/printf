@@ -2,43 +2,44 @@
 #include <stdarg.h>
 #include "main.h"
 
+int print_short_hex(char *hx, long int i, char *bf, int *bf_n, char *flg);
 
 /**
-* print_lower_hex_format - Prints the _printf function's argument
-* in lower hexadecimal format
+* print_lower_short_hex - Prints the _printf function's argument
+* in lower short hexadecimal format
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
 * Return: The number of printed characters
 */
-int print_lower_hex_format(va_list ptr, char *buf, int *buf_ind, char *flag)
+int print_lower_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag)
 {
-	unsigned int i = va_arg(ptr, unsigned int);
+	short i = va_arg(ptr, int);
 	char *hex_format = "0123456789abcdef";
 
-	return (print_hex_format(hex_format, i, buf, buf_ind, flag));
+	return (print_short_hex(hex_format, i, buf, buf_ind, flag));
 }
 
 /**
-* print_upper_hex_format - Prints the _printf function's argument
-* in upper hexadecimal format
+* print_short_upper_hex - Prints the _printf function's argument
+* in upper short hexadecimal format
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buf: Is the buffer to store the printable character
 * @buf_ind: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
 * Return: The number of printed characters
 */
-int print_upper_hex_format(va_list ptr, char *buf, int *buf_ind, char *flag)
+int print_upper_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag)
 {
-	unsigned int i = va_arg(ptr, unsigned int);
+	short i = va_arg(ptr, int);
 	char *hex_format = "0123456789ABCDEF";
 
-	return (print_hex_format(hex_format, i, buf, buf_ind, flag));
+	return (print_short_hex(hex_format, i, buf, buf_ind, flag));
 }
 
 /**
-* print_hex_format - Prints the _printf function's argument
+* print_short_hex - Prints the _printf function's argument
 * in hexadecimal format
 * @hx: Is the hex format in upper or lower letters
 * @i: Is the number to print its hexadecimal format
@@ -48,10 +49,10 @@ int print_upper_hex_format(va_list ptr, char *buf, int *buf_ind, char *flag)
 * Return: The number of printed characters
 */
 
-int print_hex_format(char *hx, unsigned int i, char *bf, int *bf_n, char *flg)
+int print_short_hex(char *hx, long int i, char *bf, int *bf_n, char *flg)
 {
-	unsigned int tmp = i;
-	unsigned int divider = 1;
+	short tmp = i;
+	short divider = 1;
 	int printed_characters = 0;
 	int index;
 
