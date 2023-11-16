@@ -15,7 +15,7 @@ int short_octal(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
 	unsigned short i = va_arg(ptr, int);
 	unsigned short tmp = i;
-	int divider = 1, printed_characters = 0;
+	unsigned short divider = 1, printed_characters = 0;
 	char num;
 	int x, len = 0, remind;
 
@@ -46,7 +46,6 @@ int short_octal(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 			break;
 		}
 	}
-
 	while (divider >= 1)
 	{
 		num = ((i / divider) % 8) + '0';

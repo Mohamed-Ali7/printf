@@ -16,8 +16,8 @@ int unsigned_short_int(va_list p, char *buf, int *buf_ind, char *flags, int w)
 {
 	unsigned short i = va_arg(p, int);
 	unsigned short tmp = i;
-	int divider = 1;
-	int printed_characters = 0, x, len = 0, remind;
+	unsigned short divider = 1;
+	short printed_characters = 0, x, len = 0, remind;
 	char num;
 	(void) (flags);
 
@@ -67,9 +67,9 @@ int unsigned_short_int(va_list p, char *buf, int *buf_ind, char *flags, int w)
 int short_int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
 {
 	short i = va_arg(ptr, int);
-	int x = 0;
-	unsigned short tmp = i;
-	int printed_characters = 0, is_neg = 0;
+	short x = 0;
+	short printed_characters = 0, is_neg = 0;
+	short r;
 	char nums[32];
 
 	if (i == 0)
@@ -81,13 +81,15 @@ int short_int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
 	if (i < 0)
 	{
 		is_neg = 1;
-		tmp *= -1;
 	}
 
-	for (x = 0; tmp != 0; x++)
+	for (x = 0; i != 0; x++)
 	{
-		nums[x] = (tmp % 10) + '0';
-		tmp = tmp / 10;
+		r = (i % 10);
+		if (r < 0)
+			r *= -1;
+		nums[x] = r + '0';
+		i = i / 10;
 	}
 
 	printed_characters += print_flag_if_exist(flags, buf, buf_ind, w, x, is_neg);

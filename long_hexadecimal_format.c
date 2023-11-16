@@ -14,7 +14,7 @@
 */
 int lower_long_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
-	long i = va_arg(ptr, long);
+	unsigned long i = va_arg(ptr, unsigned long);
 	char *hex_format = "0123456789abcdef";
 
 	return (long_hex(hex_format, i, buf, buf_ind, flag, w));
@@ -31,7 +31,7 @@ int lower_long_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 */
 int upper_long_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
-	long i = va_arg(ptr, long);
+	unsigned long i = va_arg(ptr, unsigned long);
 	char *hex_format = "0123456789ABCDEF";
 
 	return (long_hex(hex_format, i, buf, buf_ind, flag, w));
@@ -48,9 +48,9 @@ int upper_long_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * Return: The number of printed characters
 */
 
-int long_hex(char *hx, long int i, char *bf, int *bf_n, char *flg, int w)
+int long_hex(char *hx, unsigned long int i, char *bf, int *bf_n, char *flg, int w)
 {
-	long tmp = i;
+	unsigned long tmp = i;
 	unsigned long divider = 1;
 	int printed_characters = 0;
 	int index, len = 0, remind;

@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include "main.h"
 
-int short_hex(char *hx, long int i, char *bf, int *bf_n, char *flg, int w);
+int short_hex(char *hx, unsigned short i, char *bf, int *bf_n, char *flg, int w);
 
 /**
 * lower_short_hex - Prints the _printf function's argument
@@ -15,7 +15,7 @@ int short_hex(char *hx, long int i, char *bf, int *bf_n, char *flg, int w);
 */
 int lower_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
-	short i = va_arg(ptr, int);
+	unsigned short i = va_arg(ptr, int);
 	char *hex_format = "0123456789abcdef";
 
 	return (short_hex(hex_format, i, buf, buf_ind, flag, w));
@@ -32,7 +32,7 @@ int lower_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 */
 int upper_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
-	short i = va_arg(ptr, int);
+	unsigned short i = va_arg(ptr, int);
 	char *hex_format = "0123456789ABCDEF";
 
 	return (short_hex(hex_format, i, buf, buf_ind, flag, w));
@@ -49,10 +49,10 @@ int upper_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * Return: The number of printed characters
 */
 
-int short_hex(char *hx, long int i, char *bf, int *bf_n, char *flg, int w)
+int short_hex(char *hx, unsigned short i, char *bf, int *bf_n, char *flg, int w)
 {
-	short tmp = i;
-	int divider = 1;
+	unsigned short tmp = i;
+	unsigned short divider = 1;
 	int printed_characters = 0;
 	int index, len = 0, remind;
 

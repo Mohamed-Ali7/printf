@@ -47,7 +47,6 @@ int long_octal(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 			break;
 		}
 	}
-
 	while (divider >= 1)
 	{
 		num = ((i / divider) % 8) + '0';
