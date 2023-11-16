@@ -66,6 +66,7 @@ int unsigned_int_format(va_list p, char *buf, int *buf_ind, char *fl, int w)
 	unsigned int divider = 1;
 	int printed_characters = 0, x, len = 0, remind;
 	char num;
+
 	(void) (fl);
 
 	if (i == 0)

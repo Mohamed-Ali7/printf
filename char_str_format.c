@@ -18,8 +18,9 @@ int char_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 {
 	char c = va_arg(ptr, int);
 	int printed_characters = 0;
-	(void) (flag);
 	int i;
+
+	(void) (flag);
 
 	for (i = 0; i < w - 1; i++)
 	{
@@ -45,6 +46,7 @@ int string_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
 	char *str = va_arg(ptr, char *);
 	int i, len;
 	int printed_characters = 0;
+
 	(void) (fl);
 
 	if (str == NULL)
@@ -81,6 +83,7 @@ int cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 	int printed_characters = 0;
 	int i = 0;
 	char *hex = "0123456789ABCDEF";
+
 	(void) (flag);
 	(void) (w);
 
@@ -129,6 +132,7 @@ int rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flg, int w)
 	int i = 0;
 	int printed_characters = 0;
 	char c;
+
 	(void) (flg);
 	(void) (w);
 
@@ -179,6 +183,7 @@ int rev_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 	int printed_characters = 0;
 	char c;
 	int str_len;
+
 	(void) (flag);
 	(void) (w);
 

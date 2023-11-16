@@ -20,6 +20,7 @@ int unsigned_short_int(va_list p, char *buf, int *buf_ind, char *flags, int w)
 	unsigned short divider = 1;
 	short printed_characters = 0, x, len = 0, remind;
 	char num;
+
 	(void) (flags);
 
 	if (i == 0)

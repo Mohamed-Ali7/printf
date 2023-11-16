@@ -21,6 +21,7 @@ int unsigned_long_int(va_list p, char *buf, int *buf_ind, char *flag, int w)
 	unsigned long divider = 1;
 	int printed_characters = 0, len = 0, x, remind;
 	char num;
+
 	(void) (flag);
 
 	if (i == 0)

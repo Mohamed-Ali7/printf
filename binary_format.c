@@ -18,6 +18,7 @@ int binary_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
 	unsigned int tmp = val;
 	unsigned int divider = 1;
 	char bit;
+
 	(void) (fl);
 	(void) (w);
 
