@@ -19,6 +19,7 @@ int char_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 	char c = va_arg(ptr, int);
 	int printed_characters = 0;
 	(void) (flag);
+	int i;
 
 	for (i = 0; i < w - 1; i++)
 	{
