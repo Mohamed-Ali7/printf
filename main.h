@@ -39,7 +39,7 @@ int unsigned_long_int(va_list, char *, int *, char *, int);
 int long_int_format(va_list, char *, int *, char *, int);
 int upper_long_hex(va_list, char *, int *, char *, int);
 int lower_long_hex(va_list, char *, int *, char *, int);
-int long_hex(char *hx, long i, char *bf, int *bf_n, char *flg, int w);
+int long_hex(char *hx, unsigned long i, char *bf, int *bf_n, char *, int);
 int long_octal(va_list, char *, int *, char *, int);
 int short_octal(va_list, char *, int *, char *, int);
 int unsigned_short_int(va_list, char *, int *, char *, int);

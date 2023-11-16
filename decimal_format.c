@@ -14,8 +14,7 @@
 int int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
 {
 	int i = va_arg(ptr, int);
-	int x = 0, is_neg = 0;
-	unsigned int tmp = i;
+	int x = 0, is_neg = 0, r;
 	int printed_characters = 0;
 	char nums[10];
 
@@ -28,13 +27,15 @@ int int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
 	if (i < 0)
 	{
 		is_neg = 1;
-		tmp *= -1;
 	}
 
-	for (x = 0; tmp != 0; x++)
+	for (x = 0; i != 0; x++)
 	{
-		nums[x] = (tmp % 10) + '0';
-		tmp = tmp / 10;
+		r = (i % 10);
+		if (r < 0)
+			r *= -1;
+		nums[x] = r + '0';
+		i = i / 10;
 	}
 
 	printed_characters += print_flag_if_exist(flags, buf, buf_ind, w, x, is_neg);
