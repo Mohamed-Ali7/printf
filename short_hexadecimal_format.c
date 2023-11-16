@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include "main.h"
 
-int short_hex(char *hx, unsigned short i, char *bf, int *bf_n, char *flg, int w);
+int short_hex(char *hx, unsigned short i, char *bf, int *bf_n, char *f, int w);
 
 /**
 * lower_short_hex - Prints the _printf function's argument
@@ -47,12 +47,12 @@ int upper_short_hex(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * @i: Is the number to print its hexadecimal format
 * @bf: Is the buffer to store the printable character
 * @bf_n: Is the current index of the buffer
-* @flg: Are the flags to check for custom print
+* @f: Are the flags to check for custom print
 * @w: Is the width of the specifier
 * Return: The number of printed characters
 */
 
-int short_hex(char *hx, unsigned short i, char *bf, int *bf_n, char *flg, int w)
+int short_hex(char *hx, unsigned short i, char *bf, int *bf_n, char *f, int w)
 {
 	unsigned short tmp = i;
 	unsigned short divider = 1;
@@ -73,9 +73,9 @@ int short_hex(char *hx, unsigned short i, char *bf, int *bf_n, char *flg, int w)
 	{
 		printed_characters += add_to_buffer(bf, bf_n, ' ');
 	}
-	for (index = 0; flg[index] != '\0'; index++)
+	for (index = 0; f[index] != '\0'; index++)
 	{
-		if (flg[index] == '#')
+		if (f[index] == '#')
 		{
 			for (index = 0; remind > 0 && index < 2; index++, remind--)
 				*bf_n = *bf_n - 1;
