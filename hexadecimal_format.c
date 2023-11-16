@@ -73,7 +73,7 @@ int hex_format(char *hx, unsigned int i, char *bf, int *bf_n, char *f, int w)
 	}
 	for (index = 0; f[index] != '\0'; index++)
 	{
-		if (f[index] == '#')
+		if (f[index] == '#' && i != 0)
 		{
 			for (index = 0; remind > 0 && index < 2; index++, remind--)
 				*bf_n = *bf_n - 1;

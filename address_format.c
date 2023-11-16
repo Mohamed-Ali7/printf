@@ -21,6 +21,8 @@ int add_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 
 	if (address == NULL)
 	{
+		for (index = 0; index < w - 5; index++)
+			printed_characters += add_to_buffer(buf, buf_ind, ' ');
 		for (index = 0; non[index] != '\0'; index++)
 			printed_characters += add_to_buffer(buf, buf_ind, non[index]);
 		return (printed_characters);

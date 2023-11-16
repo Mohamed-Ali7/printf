@@ -19,7 +19,11 @@ int char_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 	char c = va_arg(ptr, int);
 	int printed_characters = 0;
 	(void) (flag);
-	(void) (w);
+
+	for (i = 0; i < w - 1; i++)
+	{
+		printed_characters += add_to_buffer(buf, buf_ind, ' ');
+	}
 
 	printed_characters += add_to_buffer(buf, buf_ind, c);
 
@@ -38,14 +42,20 @@ int char_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 int string_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
 {
 	char *str = va_arg(ptr, char *);
-	int i;
+	int i, len;
 	int printed_characters = 0;
 	(void) (fl);
-	(void) (w);
 
 	if (str == NULL)
 	{
 		str = "(null)";
+	}
+
+	len = _len(str);
+
+	for (i = 0; i < w - len; i++)
+	{
+		printed_characters += add_to_buffer(buf, buf_ind, ' ');
 	}
 
 	for (i = 0; str[i] != '\0'; i++)
