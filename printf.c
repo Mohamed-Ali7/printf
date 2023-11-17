@@ -8,6 +8,7 @@
 
 int check_flag(const char *str);
 int width(const char *str, va_list ptr, int *format_index);
+int precision(const char *str, va_list ptr, int *format_index);
 
 /**
 * get_specifier_format - Creates and Initialize an array of spec_format sruct
@@ -61,7 +62,7 @@ spec_format *get_specifier_format()
 
 int _printf(const char *format, ...)
 {
-	int j, i, buf_ind = 0, printed_chars = 0, flag_count, wid;
+	int j, i, buf_ind = 0, printed_chars = 0, flag_count, wid, prec;
 	spec_format *spec = get_specifier_format();
 	char buffer[1024], flag[150];
 	va_list listPtr;
@@ -83,6 +84,7 @@ int _printf(const char *format, ...)
 			}
 			flag[j] = '\0';
 			wid = width(format, listPtr, &i);
+			prec = precision(format, listPtr, &i);
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
 				if (spec[j].specifier[0] == format[i])
@@ -91,12 +93,12 @@ int _printf(const char *format, ...)
 					if (ch != '\0' && ch == format[i + 1])
 					{
 						i++;
-						printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid);
+						printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid, prec);
 						break;
 					}
 					else if (ch != '\0' && ch != format[i + 1])
 						continue;
-					printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid);
+					printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid, prec);
 					break;
 				}
 				if (spec[j + 1].specifier == NULL)
@@ -182,3 +184,36 @@ int check_flag(const char *str)
 	return (flag_count);
 }
 
+/**
+ * precision - fetch the precsision of the specifier from the format string
+ * @str: Is the format string
+ * @ptr: Is the pointer to _printf funtion arguments
+ * @index: Is the current index of the format string (str)
+ * Return: The width of the variable
+ */
+
+int precision(const char *str, va_list ptr, int *index)
+{
+	int prec = 0;
+
+	if (str[*index] == '.')
+	{
+		if (str[*index + 1] == '*')
+		{
+			prec = va_arg(ptr, int);
+			*index = *index + 2;
+		}
+		else
+		{
+			*index = *index + 1;
+			while (str[*index] != '\0' && (str[*index] >= '0' && str[*index] <= '9'))
+			{
+				prec *= 10;
+				prec += (str[*index] - '0');
+				*index = *index + 1;
+			}
+		}
+	}
+
+	return (prec);
+}

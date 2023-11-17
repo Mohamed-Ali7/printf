@@ -6,31 +6,31 @@
 /**
 * unsigned_long_int - Prints the _printf function's argument
 * in unsigned long int format
-* @p: Is the pointer to the list of arguments of the _printf function
-* @buf: Is the buffer to store the printable character
-* @buf_ind: Is the current index of the buffer
+* @ptr: Is the pointer to the list of arguments of the _printf function
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
-* @w: Is the width of the specifier
+* @width: Is the width of the specifier
+* @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
 
-int unsigned_long_int(va_list p, char *buf, int *buf_ind, char *flag, int w)
+int unsigned_long_int(va_list ptr, char *buffer, int *buffer_index,
+		char *flag, int width, int prec)
 {
-	unsigned long i = va_arg(p, unsigned long);
+	unsigned long i = va_arg(ptr, unsigned long);
 	unsigned long tmp = i;
 	unsigned long divider = 1;
-	int printed_characters = 0, len = 0, x, remind;
+	int printed_characters = 0, len = 0;
 	char num;
 
 	(void) (flag);
 
 	if (i == 0)
 	{
-		for (x = 0; x < w - 1; x++)
-		{
-			printed_characters += add_to_buffer(buf, buf_ind, ' ');
-		}
-		printed_characters += add_to_buffer(buf, buf_ind, '0');
+		printed_characters +=
+				print_flag_if_exist("", buffer, buffer_index, width, 1, 0, prec);
+		printed_characters += add_to_buffer(buffer, buffer_index, '0');
 		return (printed_characters);
 	}
 	while (tmp > 0)
@@ -42,16 +42,13 @@ int unsigned_long_int(va_list p, char *buf, int *buf_ind, char *flag, int w)
 		}
 		len++;
 	}
-	remind = w - len;
-	for (x = 0; x < remind; x++)
-	{
-		printed_characters += add_to_buffer(buf, buf_ind, ' ');
-	}
+	printed_characters +=
+				print_flag_if_exist("", buffer, buffer_index, width, len, 0, prec);
 
 	while (divider >= 1)
 	{
 		num = ((i / divider) % 10) + '0';
-		printed_characters += add_to_buffer(buf, buf_ind, num);
+		printed_characters += add_to_buffer(buffer, buffer_index, num);
 		divider /= 10;
 	}
 
@@ -62,13 +59,15 @@ int unsigned_long_int(va_list p, char *buf, int *buf_ind, char *flag, int w)
 * long_int_format - Prints the _printf function's argument
 * in long int format
 * @ptr: Is the pointer to the list of arguments of the _printf function
-* @buf: Is the buffer to store the printable character
-* @buf_ind: Is the current index of the buffer
-* @flags: Are the flags to check for custom print
-* @w: Is the width of the specifier
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
+* @flags: Are the flag to check for custom print
+* @width: Is the width of the specifier
+* @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
-int long_int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
+int long_int_format(va_list ptr, char *buffer, int *buffer_index,
+		char *flag, int width, int prec)
 {
 	long i = va_arg(ptr, long);
 	int x = 0, r;
@@ -77,8 +76,9 @@ int long_int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
 
 	if (i == 0)
 	{
-		printed_characters += print_flag_if_exist(flags, buf, buf_ind, w, 1, 0);
-		printed_characters += add_to_buffer(buf, buf_ind, '0');
+		printed_characters +=
+			print_flag_if_exist(flag, buffer, buffer_index, width, 1, 0, prec);
+		printed_characters += add_to_buffer(buffer, buffer_index, '0');
 		return (printed_characters);
 	}
 	if (i < 0)
@@ -95,13 +95,11 @@ int long_int_format(va_list ptr, char *buf, int *buf_ind, char *flags, int w)
 		i = i / 10;
 	}
 
-	printed_characters += print_flag_if_exist(flags, buf, buf_ind, w, x, is_neg);
-	if (is_neg)
-	{
-		printed_characters += add_to_buffer(buf, buf_ind, '-');
-	}
+	printed_characters +=
+		print_flag_if_exist(flag, buffer, buffer_index, width, x, is_neg, prec);
+
 	while (x >= 1)
-		printed_characters += add_to_buffer(buf, buf_ind, nums[--x]);
+		printed_characters += add_to_buffer(buffer, buffer_index, nums[--x]);
 	return (printed_characters);
 }
 

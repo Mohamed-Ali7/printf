@@ -8,26 +8,29 @@
 /**
 * char_format - Prints the _printf function's argument in char format
 * @ptr: Is the pointer to the list of arguments of the _printf function
-* @buf: Is the buffer to store the printable character
-* @buf_ind: Is the current index of the buffer
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
-* @w: Is the width of the specifier
+* @width: Is the width of the specifier
+* @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
-int char_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
+int char_format(va_list ptr, char *buffer, int *buffer_index,
+		char *flag, int width, int prec)
 {
 	char c = va_arg(ptr, int);
 	int printed_characters = 0;
 	int i;
 
 	(void) (flag);
+	(void) (prec);
 
-	for (i = 0; i < w - 1; i++)
+	for (i = 0; i < width - 1; i++)
 	{
-		printed_characters += add_to_buffer(buf, buf_ind, ' ');
+		printed_characters += add_to_buffer(buffer, buffer_index, ' ');
 	}
 
-	printed_characters += add_to_buffer(buf, buf_ind, c);
+	printed_characters += add_to_buffer(buffer, buffer_index, c);
 
 	return (printed_characters);
 }
@@ -35,19 +38,22 @@ int char_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 /**
 * string_format - Prints the _printf function's argument in string format
 * @ptr: Is the pointer to the list of arguments of the _printf function
-* @buf: Is the buffer to store the printable character
-* @buf_ind: Is the current index of the buffer
-* @fl: Are the flags to check for custom print
-* @w: Is the width of the specifier
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
+* @flag: Are the flags to check for custom print
+* @width: Is the width of the specifier
+* @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
-int string_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
+int string_format(va_list ptr, char *buffer, int *buffer_index,
+		char *flag, int width, int prec)
 {
 	char *str = va_arg(ptr, char *);
 	int i, len;
 	int printed_characters = 0;
 
-	(void) (fl);
+	(void) (flag);
+	(void) (prec);
 
 	if (str == NULL)
 	{
@@ -56,14 +62,14 @@ int string_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
 
 	len = _len(str);
 
-	for (i = 0; i < w - len; i++)
+	for (i = 0; i < width - len; i++)
 	{
-		printed_characters += add_to_buffer(buf, buf_ind, ' ');
+		printed_characters += add_to_buffer(buffer, buffer_index, ' ');
 	}
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		printed_characters += add_to_buffer(buf, buf_ind, str[i]);
+		printed_characters += add_to_buffer(buffer, buffer_index, str[i]);
 	}
 	return (printed_characters);
 }
@@ -71,13 +77,15 @@ int string_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
 /**
 * cus_string_format - Prints the _printf function's argument
 * @ptr: Is the pointer to the list of arguments of the _printf function
-* @buf: Is the buffer to store the printable character
-* @buf_ind: Is the current index of the buffer
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
-* @w: Is the width of the specifier
+* @width: Is the width of the specifier
+* @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
-int cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
+int cus_string_format(va_list ptr, char *buffer, int *buffer_index,
+		char *flag, int width, int prec)
 {
 	char *str = va_arg(ptr, void *);
 	int printed_characters = 0;
@@ -85,7 +93,8 @@ int cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 	char *hex = "0123456789ABCDEF";
 
 	(void) (flag);
-	(void) (w);
+	(void) (width);
+	(void) (prec);
 
 	if (str == NULL)
 	{
@@ -96,18 +105,18 @@ int cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 	{
 		if (str[i] < 32 || str[i] >= 127)
 		{
-			printed_characters += add_to_buffer(buf, buf_ind, '\\');
-			printed_characters += add_to_buffer(buf, buf_ind, 'x');
+			printed_characters += add_to_buffer(buffer, buffer_index, '\\');
+			printed_characters += add_to_buffer(buffer, buffer_index, 'x');
 			if (str[i] <= 16)
 			{
-				printed_characters += add_to_buffer(buf, buf_ind, '0');
+				printed_characters += add_to_buffer(buffer, buffer_index, '0');
 			}
-			hex_format(hex, (unsigned int) str[i], buf, buf_ind, "", 0);
+			hex_format(hex, (unsigned int) str[i], buffer, buffer_index, "", 0, 0);
 			i++;
 		}
 		else
 		{
-			printed_characters += add_to_buffer(buf, buf_ind, str[i]);
+			printed_characters += add_to_buffer(buffer, buffer_index, str[i]);
 			i++;
 		}
 	}
@@ -119,22 +128,24 @@ int cus_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 * rot13_string_format - Prints the _printf function's string argument
 * encoded into rot13.
 * @ptr: Is the pointer to the list of arguments of the _printf function
-* @buf: Is the buffer to store the printable character
-* @buf_ind: Is the current index of the buffer
-* @flg: Are the flags to check for custom print
-* @w: Is the width of the specifier
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
+* @flag: Are the flags to check for custom print
+* @width: Is the width of the specifier
+* @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
 
-int rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flg, int w)
+int rot13_string_format(va_list ptr, char *buffer, int *buffer_index, char *flag, int width, int prec)
 {
 	char *str = va_arg(ptr, char *);
 	int i = 0;
 	int printed_characters = 0;
 	char c;
 
-	(void) (flg);
-	(void) (w);
+	(void) (flag);
+	(void) (width);
+	(void) (prec);
 
 	if (str == NULL)
 	{
@@ -160,7 +171,7 @@ int rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flg, int w)
 			}
 			c += 13;
 		}
-		printed_characters += add_to_buffer(buf, buf_ind, c);
+		printed_characters += add_to_buffer(buffer, buffer_index, c);
 		i++;
 	}
 	return (printed_characters);
@@ -171,13 +182,14 @@ int rot13_string_format(va_list ptr, char *buf, int *buf_ind, char *flg, int w)
 * in reveresed
 *
 * @ptr: Is the pointer to the list of arguments of the _printf function
-* @buf: Is the buffer to store the printable character
-* @buf_ind: Is the current index of the buffer
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
 * @flag: Are the flags to check for custom print
-* @w: Is the width of the specifier
+* @width: Is the width of the specifier
+* @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
-int rev_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
+int rev_string_format(va_list ptr, char *buffer, int *buffer_index, char *flag, int width, int prec)
 {
 	char *str = va_arg(ptr, char *);
 	int printed_characters = 0;
@@ -185,7 +197,8 @@ int rev_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 	int str_len;
 
 	(void) (flag);
-	(void) (w);
+	(void) (width);
+	(void) (prec);
 
 	if (str == NULL)
 	{
@@ -197,7 +210,7 @@ int rev_string_format(va_list ptr, char *buf, int *buf_ind, char *flag, int w)
 	{
 		c = str[str_len - 1];
 
-		printed_characters += add_to_buffer(buf, buf_ind, c);
+		printed_characters += add_to_buffer(buffer, buffer_index, c);
 		str_len--;
 	}
 	return (printed_characters);

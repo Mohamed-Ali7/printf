@@ -4,14 +4,15 @@
 /**
 * binary_format - Prints the _printf function's argument in binary foramt
 * @ptr: Is the pointer to the list of arguments of the _printf function
-* @buf: Is the buffer to store the printable character
-* @buf_ind: Is the current index of the buffer
-* @fl: Are the flags to check for custom print
-* @w: Is the width of the specifier
+* @buffer: Is the buffer to store the printable character
+* @buffer_index: Is the current index of the buffer
+* @flag: Are the flags to check for custom print
+* @width: Is the width of the specifier
+* @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
 
-int binary_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
+int binary_format(va_list ptr, char *buffer, int *buffer_index, char *flag, int width, int prec)
 {
 	unsigned int val = va_arg(ptr, unsigned int);
 	int printed_characters = 0;
@@ -19,12 +20,13 @@ int binary_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
 	unsigned int divider = 1;
 	char bit;
 
-	(void) (fl);
-	(void) (w);
+	(void) (flag);
+	(void) (width);
+	(void) (prec);
 
 	if (val == 0)
 	{
-		printed_characters += add_to_buffer(buf, buf_ind, '0');
+		printed_characters += add_to_buffer(buffer, buffer_index, '0');
 		return (printed_characters);
 	}
 
@@ -40,7 +42,7 @@ int binary_format(va_list ptr, char *buf, int *buf_ind, char *fl, int w)
 	while (divider >= 1)
 	{
 		bit = ((tmp / divider) % 2) + '0';
-		printed_characters += add_to_buffer(buf, buf_ind, bit);
+		printed_characters += add_to_buffer(buffer, buffer_index, bit);
 		divider /= 2;
 	}
 

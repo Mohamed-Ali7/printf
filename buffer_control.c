@@ -47,55 +47,69 @@ int free_buffer(char *buf, int *buf_index)
 
 /**
  * print_flag_if_exist - Checks for flags to print
- * @f: is the flag to check
- * @bf: Is the buffer to store the printable character
- * @bf_n: Is the current index of the buffer
- * @w: Is the width of the specifier
- * @l: Is the len of the variable which is being refered to by the specifier
- * @is_ng: To clear whether the number is negative or not
+ * @flag: is the flag to check
+ * @buffer: Is the buffer to store the printable character
+ * @buffer_index: Is the current index of the buffer
+ * @width: Is the width of the specifier
+ * @length: Is the len of the variable which is being refered to by the specifier
+ * @is_neg: To clear whether the number is negative or not
+ * @prec: Is the precision of the specifier
  * Return: The number of printed characters
  */
 
-int print_flag_if_exist(char *f, char *bf, int *bf_n, int w, int l, int is_ng)
+int print_flag_if_exist(char *flag, char *buffer, int *buffer_index,
+		int width, int length, int is_neg, int prec)
 {
-	int printed_characters = 0;
-	int i;
-	int remind = w - l;
+	int printed_characters = 0, i, remind = width - length;
 
-	if (is_ng)
+	prec = prec - length;
+	if (is_neg)
 		remind--;
 
+	if (prec > 0)
+	{
+		remind = width - (prec + length);
+		if (is_neg)
+			remind--;
+	}
+
 	for (i = 0; i < remind; i++)
+		printed_characters += add_to_buffer(buffer, buffer_index, ' ');
+
+	if (!is_neg)
 	{
-		printed_characters += add_to_buffer(bf, bf_n, ' ');
-	}
-	for (i = 0; f[i] != '\0'; i++)
-	{
-		if (f[i] == '+')
+		for (i = 0; flag[i] != '\0'; i++)
 		{
-			if (!is_ng)
+			if (flag[i] == '+')
 			{
 				if (remind > 0)
-					*bf_n = *bf_n - 1;
-				printed_characters += add_to_buffer(bf, bf_n, '+');
-			}
-			f = NULL;
-			break;
-		}
-	}
-	if (f != NULL)
-	{
-		for (i = 0; f[i] != '\0'; i++)
-		{
-			if (f[i] == ' ')
-			{
-				if (remind > 0)
-					*bf_n = *bf_n - 1;
-				printed_characters += add_to_buffer(bf, bf_n, ' ');
+					*buffer_index = *buffer_index - 1;
+				printed_characters += add_to_buffer(buffer, buffer_index, '+');
+				flag = NULL;
 				break;
 			}
 		}
+	
+		if (flag != NULL)
+		{
+			for (i = 0; flag[i] != '\0'; i++)
+			{
+				if (flag[i] == ' ')
+				{
+					if (remind > 0)
+						*buffer_index = *buffer_index - 1;
+					printed_characters += add_to_buffer(buffer, buffer_index, ' ');
+					break;
+				}
+			}
+		}
 	}
+	else
+		printed_characters += add_to_buffer(buffer, buffer_index, '-');
+
+	for (i = 0; i < prec; i++)
+		printed_characters += add_to_buffer(buffer, buffer_index, '0');
+
 	return (printed_characters);
 }
 
