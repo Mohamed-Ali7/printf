@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
-#include <stdio.h>
 
 /**
 * octal_format - Prints the _printf function's argument in octal
@@ -60,4 +59,3 @@ int octal_format(va_list ptr, char *buffer, int *buffer_index,
 	}
 	return (printed_characters);
 }
-

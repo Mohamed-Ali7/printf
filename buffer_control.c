@@ -65,17 +65,14 @@ int print_flag_if_exist(char *flag, char *buffer, int *buffer_index,
 	prec = prec - length;
 	if (is_neg)
 		remind--;
-
 	if (prec > 0)
 	{
 		remind = width - (prec + length);
 		if (is_neg)
 			remind--;
 	}
-
 	for (i = 0; i < remind; i++)
 		printed_characters += add_to_buffer(buffer, buffer_index, ' ');
-
 	if (!is_neg)
 	{
 		for (i = 0; flag[i] != '\0'; i++)
@@ -89,7 +86,6 @@ int print_flag_if_exist(char *flag, char *buffer, int *buffer_index,
 				break;
 			}
 		}
-	
 		if (flag != NULL)
 		{
 			for (i = 0; flag[i] != '\0'; i++)
@@ -106,10 +102,8 @@ int print_flag_if_exist(char *flag, char *buffer, int *buffer_index,
 	}
 	else
 		printed_characters += add_to_buffer(buffer, buffer_index, '-');
-
 	for (i = 0; i < prec; i++)
 		printed_characters += add_to_buffer(buffer, buffer_index, '0');
-
 	return (printed_characters);
 }
 

@@ -62,7 +62,7 @@ spec_format *get_specifier_format()
 
 int _printf(const char *format, ...)
 {
-	int j, i, buf_ind = 0, printed_chars = 0, flag_count, wid, prec;
+	int j, i, buf_ind = 0, printed_chars = 0, flag_count, wid, prc;
 	spec_format *spec = get_specifier_format();
 	char buffer[1024], flag[150];
 	va_list listPtr;
@@ -84,7 +84,7 @@ int _printf(const char *format, ...)
 			}
 			flag[j] = '\0';
 			wid = width(format, listPtr, &i);
-			prec = precision(format, listPtr, &i);
+			prc = precision(format, listPtr, &i);
 			for (j = 0; spec[j].specifier != NULL; j++)
 			{
 				if (spec[j].specifier[0] == format[i])
@@ -93,12 +93,12 @@ int _printf(const char *format, ...)
 					if (ch != '\0' && ch == format[i + 1])
 					{
 						i++;
-						printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid, prec);
+						printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid, prc);
 						break;
 					}
 					else if (ch != '\0' && ch != format[i + 1])
 						continue;
-					printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid, prec);
+					printed_chars += spec[j].func(listPtr, buffer, &buf_ind, flag, wid, prc);
 					break;
 				}
 				if (spec[j + 1].specifier == NULL)

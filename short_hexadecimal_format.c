@@ -63,8 +63,7 @@ int short_hex(char *hex, unsigned short i, char *buffer, int *buffer_index,
 {
 	unsigned short tmp = i;
 	unsigned short divider = 1;
-	int printed_characters = 0;
-	int index, len = 0, remind;
+	int printed_characters = 0, index, len = 0, remind;
 
 	if (i == 0)
 		len = 1;
@@ -79,12 +78,8 @@ int short_hex(char *hex, unsigned short i, char *buffer, int *buffer_index,
 	prec -= len;
 	if (prec > 0)
 		remind = width - (prec + len);
-
 	for (index = 0; index < remind; index++)
-	{
 		printed_characters += add_to_buffer(buffer, buffer_index, ' ');
-	}
-	
 	for (index = 0; flag[index] != '\0'; index++)
 	{
 		if (flag[index] == '#' && i != 0)

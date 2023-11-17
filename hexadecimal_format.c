@@ -14,7 +14,8 @@
 * @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
-int lower_hex_format(va_list ptr, char *buffer, int *buffer_index, char *flag, int width, int prec)
+int lower_hex_format(va_list ptr, char *buffer, int *buffer_index,
+		char *flag, int width, int prec)
 {
 	unsigned int i = va_arg(ptr, unsigned int);
 	char *hex = "0123456789abcdef";

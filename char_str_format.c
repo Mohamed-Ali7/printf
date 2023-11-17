@@ -136,7 +136,8 @@ int cus_string_format(va_list ptr, char *buffer, int *buffer_index,
 * Return: The number of printed characters
 */
 
-int rot13_string_format(va_list ptr, char *buffer, int *buffer_index, char *flag, int width, int prec)
+int rot13_string_format(va_list ptr, char *buffer, int *buffer_index,
+		char *flag, int width, int prec)
 {
 	char *str = va_arg(ptr, char *);
 	int i = 0;
@@ -189,7 +190,8 @@ int rot13_string_format(va_list ptr, char *buffer, int *buffer_index, char *flag
 * @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
-int rev_string_format(va_list ptr, char *buffer, int *buffer_index, char *flag, int width, int prec)
+int rev_string_format(va_list ptr, char *buffer, int *buffer_index,
+		char *flag, int width, int prec)
 {
 	char *str = va_arg(ptr, char *);
 	int printed_characters = 0;

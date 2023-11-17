@@ -61,7 +61,7 @@ int unsigned_long_int(va_list ptr, char *buffer, int *buffer_index,
 * @ptr: Is the pointer to the list of arguments of the _printf function
 * @buffer: Is the buffer to store the printable character
 * @buffer_index: Is the current index of the buffer
-* @flags: Are the flag to check for custom print
+* @flag: Are the flag to check for custom print
 * @width: Is the width of the specifier
 * @prec: Is the precision of the specifier
 * Return: The number of printed characters
