@@ -14,7 +14,7 @@
 typedef struct specifier_format
 {
 	char *specifier;
-	int (*func)(va_list ptr, char *buf, int *buf_ind, char *flags, int w, int prc);
+	int (*func)(va_list ptr, char *buf, int *buf_ind, char *flg, int w, int prc);
 } spec_format;
 
 int _printf(const char *format, ...);
