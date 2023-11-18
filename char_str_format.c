@@ -64,7 +64,7 @@ int string_format(va_list ptr, char *buffer, int *buffer_index,
 	}
 
 	len = _len(str);
-	if (prec > 0)
+	if (prec > 0 && len > prec)
 	{
 		len = prec;
 	}

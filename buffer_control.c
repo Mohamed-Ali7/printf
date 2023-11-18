@@ -51,7 +51,8 @@ int free_buffer(char *buf, int *buf_index)
  * @buffer: Is the buffer to store the printable character
  * @buffer_index: Is the current index of the buffer
  * @width: Is the width of the specifier
- * @length: Is the len of the variable which is being refered to by the specifier
+ * @length: Is the len of the variable which
+ * is being refered to by the specifier
  * @is_neg: To clear whether the number is negative or not
  * @prec: Is the precision of the specifier
  * Return: The number of printed characters
@@ -82,21 +83,18 @@ int print_flag_if_exist(char *flag, char *buffer, int *buffer_index,
 				if (remind > 0)
 					*buffer_index = *buffer_index - 1;
 				printed_characters += add_to_buffer(buffer, buffer_index, '+');
-				flag = NULL;
+				flag[0] = '\0';
 				break;
 			}
 		}
-		if (flag != NULL)
+		for (i = 0; flag[i] != '\0'; i++)
 		{
-			for (i = 0; flag[i] != '\0'; i++)
+			if (flag[i] == ' ')
 			{
-				if (flag[i] == ' ')
-				{
-					if (remind > 0)
-						*buffer_index = *buffer_index - 1;
-					printed_characters += add_to_buffer(buffer, buffer_index, ' ');
-					break;
-				}
+				if (remind > 0)
+					*buffer_index = *buffer_index - 1;
+				printed_characters += add_to_buffer(buffer, buffer_index, ' ');
+				break;
 			}
 		}
 	}

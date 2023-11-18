@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stdio.h>
+#include <stddef.h>
 
 /**
 * add_format - Prints the _printf function's argument in address format
@@ -11,7 +11,6 @@
 * @prec: Is the precision of the specifier
 * Return: The number of printed characters
 */
-
 int add_format(va_list ptr, char *buffer, int *buffer_index,
 		char *flag, int width, int prec)
 {
@@ -20,6 +19,7 @@ int add_format(va_list ptr, char *buffer, int *buffer_index,
 	int index, printed_characters = 0, len = 0;
 	unsigned long tmp = add_val, divider = 1;
 	char *hex = "0123456789abcdef", *non = "(nil)";
+
 	if (address == NULL)
 	{
 		for (index = 0; index < width - 5; index++)
@@ -40,7 +40,8 @@ int add_format(va_list ptr, char *buffer, int *buffer_index,
 		len -= 2;
 		width -= 2;
 	}
-	printed_characters += print_flag_if_exist(flag, buffer, buffer_index, width, len + 2, 0, prec);
+	printed_characters +=
+		print_flag_if_exist(flag, buffer, buffer_index, width, len + 2, 0, prec);
 	if (prec > 0)
 	{
 		printed_characters += add_to_buffer(buffer, buffer_index, '0');
