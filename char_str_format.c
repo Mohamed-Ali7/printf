@@ -53,21 +53,27 @@ int string_format(va_list ptr, char *buffer, int *buffer_index,
 	int printed_characters = 0;
 
 	(void) (flag);
-	(void) (prec);
 
 	if (str == NULL)
 	{
+		if (prec < 6)
+		{
+			return (0);
+		}
 		str = "(null)";
 	}
 
 	len = _len(str);
-
+	if (prec > 0)
+	{
+		len = prec;
+	}
 	for (i = 0; i < width - len; i++)
 	{
 		printed_characters += add_to_buffer(buffer, buffer_index, ' ');
 	}
 
-	for (i = 0; str[i] != '\0'; i++)
+	for (i = 0; str[i] != '\0' && i < len; i++)
 	{
 		printed_characters += add_to_buffer(buffer, buffer_index, str[i]);
 	}
