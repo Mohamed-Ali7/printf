@@ -56,7 +56,7 @@ int string_format(va_list ptr, char *buffer, int *buffer_index,
 
 	if (str == NULL)
 	{
-		if (prec < 6)
+		if (prec > 0 && prec < 6)
 		{
 			return (0);
 		}
